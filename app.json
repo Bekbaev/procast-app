@@ -1,0 +1,18 @@
+{
+  "expo": {
+    "name": "procast-app",
+    "description": "your app desc",
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.procast.procast"
+    },
+    "slug": "procast-app",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "procast-app"
+}
