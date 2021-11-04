@@ -34,7 +34,7 @@ export default function CastingBlock({casting, dispatch, navigation}) {
 
     const toCastingScreen = () => {
         navigation.navigate('CastingScreen', {
-            itemId: 86,
+            id: castingId,
         })
     }
 

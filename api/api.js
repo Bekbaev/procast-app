@@ -26,6 +26,10 @@ export const castingApi = {
         const {data} = await instance.get('casting')
         return data
     },
+    async getById(id){
+        const {data} = await instance.get(`casting/${id}`)
+        return data
+    },
     async getMyCastings() {
         const {data} = await instance.get('myCastings')
         return data

@@ -23,10 +23,13 @@ const CreateCasting = () => {
     const [race, setRace] = useState('asian')
     const [eye, setEye] = useState('brown')
     const [hair, setHair] = useState('blond')
+    const [height, setHeight] = useState('')
+    const [weight, setWeight] = useState('')
     const [language, setLanguage] = useState('english')
     const [date, setDate] = useState(new Date(1598051730000));
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
+    const [signs, setSigns] = useState('');
     const [payment, setPayment] = useState('');
 
 
@@ -43,7 +46,17 @@ const CreateCasting = () => {
             'city': city,
             'start_date': `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`,
             'image': 'https://www.sion-consulting.com/wp-content/themes/consultix/images/no-image-found-360x250.png',
-            'category': category
+            'category': category,
+            'type': type,
+            'gender': sex,
+            'race': race,
+            'eye': eye,
+            'hair': hair,
+            'language': language,
+            'duration': duration,
+            'weight': weight,
+            'height': height,
+            'signs': signs,
         }
 
         dispatch(createCasting(newCasting))
@@ -189,6 +202,7 @@ const CreateCasting = () => {
                     <Text style={styles.signsTitle}>Особые приметы, предпочтения, описание проекта</Text>
                     <TextInput
                         style={styles.signsInput}
+                        value={signs} onChangeText={text => setSigns(text)}
                     />
 
                 </LinearGradient>
@@ -219,6 +233,7 @@ const CreateCasting = () => {
                             maxLength={40}
                             style={styles.FormInput}
                             keyboardType='numeric'
+                            value={weight} onChangeText={text => setWeight(text)}
                         />
                     </View>
                 </GradientBlock>
@@ -232,6 +247,7 @@ const CreateCasting = () => {
                             maxLength={40}
                             style={styles.FormInput}
                             keyboardType='numeric'
+                            value={height} onChangeText={text => setHeight(text)}
                         />
                     </View>
                 </GradientBlock>

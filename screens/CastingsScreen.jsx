@@ -2,15 +2,18 @@ import React, {useEffect, useState} from 'react';
 import {Image, ScrollView, StyleSheet, Text, View} from "react-native";
 import GradientBlock from "../components/GradientBlock";
 import ProfileCompletedBar from "../components/ProfileCompletedBar";
-import {authApi} from "../api/api";
+import { castingApi} from "../api/api";
 import {useDispatch} from "react-redux";
+import { useRoute } from '@react-navigation/native';
 
 const CastingScreen = () => {
     const [info, setInfo] = useState({})
-    const dispatch = useDispatch()
+    const route = useRoute();
+    const { id } = route.params;
 
     const getInfo = async () => {
-        const response = await authApi.getMe()
+        const response = await castingApi.getById(id)
+
         setInfo(response)
     }
 
@@ -22,88 +25,99 @@ const CastingScreen = () => {
     return (
         <ScrollView>
             <View style={styles.container}>
+                <GradientBlock  >
+                    <Text style={[styles.mainInfoText, styles.bold]}>{info?.name}</Text>
+                </GradientBlock>
+
                 <Image
                     style={styles.logo}
                     source={{
-                        uri: 'https://simg.nicepng.com/png/small/128-1280406_view-user-icon-png-user-circle-icon-png.png',
+                        uri: 'https://www.sion-consulting.com/wp-content/themes/consultix/images/no-image-found-360x250.png',
                     }}
                 />
 
-                <GradientBlock marginTop="20" >
-                    <Text style={[styles.mainInfoText, styles.bold]}>{info?.name}</Text>
-                </GradientBlock>
-                <ProfileCompletedBar percent={100} />
-
                 <View style={[styles.infoBlock, {marginTop: 20}]}>
-                    <View style={styles.infoBlockCategory}><Text style={styles.bold}>Возраст</Text></View>
-                    <GradientBlock>
-                        <Text style={styles.mainInfoText}>21</Text>
-                    </GradientBlock>
+                    <View style={styles.infoBlockCategory}><Text style={styles.bold}>Категория проекта</Text></View>
+                    <View style={styles.backGroundBlock}>
+                        <Text style={styles.mainInfoText}>{info.category}</Text>
+                    </View>
+                </View>
+                <View style={styles.infoBlock}>
+                    <View style={styles.infoBlockCategory}><Text style={styles.bold}>Город</Text></View>
+                    <View style={styles.backGroundBlock}>
+                        <Text style={styles.mainInfoText}>{info.city}</Text>
+                    </View>
+                </View>
+                <View style={styles.infoBlock}>
+                    <View style={styles.infoBlockCategory}><Text style={styles.bold}>Тип работы</Text></View>
+                    <View style={styles.backGroundBlock}>
+                        <Text style={styles.mainInfoText}>{info.type}</Text>
+                    </View>
+                </View>
+                <View style={styles.infoBlock}>
+                    <View style={styles.infoBlockCategory}><Text style={styles.bold}>Пол</Text></View>
+                    <View style={styles.backGroundBlock}>
+                        <Text style={styles.mainInfoText}>{info.gender}</Text>
+                    </View>
+                </View>
+                <View style={styles.infoBlock}>
+                    <View style={styles.infoBlockCategory}><Text style={styles.bold}>Длительность</Text></View>
+                    <View style={styles.backGroundBlock}>
+                        <Text style={styles.mainInfoText}>{info.duration}</Text>
+                    </View>
+                </View>
+                <View style={styles.infoBlock}>
+                    <View style={styles.infoBlockCategory}><Text style={styles.bold}>Оплата</Text></View>
+                    <View style={styles.backGroundBlock}>
+                        <Text style={styles.mainInfoText}>{info.payment}</Text>
+                    </View>
+                </View>
+                <View style={styles.infoBlock}>
+                    <View style={styles.infoBlockCategory}><Text style={styles.bold}>Типаж внешности</Text></View>
+                    <View style={styles.backGroundBlock}>
+                        <Text style={styles.mainInfoText}>{info.race}</Text>
+                    </View>
                 </View>
                 <View style={styles.infoBlock}>
                     <View style={styles.infoBlockCategory}><Text style={styles.bold}>Рост</Text></View>
-                    <GradientBlock colors="orange">
-                        <Text style={styles.mainInfoText}>171</Text>
-                    </GradientBlock>
+                    <View style={styles.backGroundBlock}>
+                        <Text style={styles.mainInfoText}>{info.height}</Text>
+                    </View>
                 </View>
-                <View style={styles.infoBlock}>
-                    <View style={styles.infoBlockCategory}><Text style={styles.bold}>Вес</Text></View>
-                    <GradientBlock>
-                        <Text style={styles.mainInfoText}>58</Text>
+                <View style={[styles.infoBlock, {flexDirection: 'column',}]}>
+                    <GradientBlock >
+                        <Text style={[styles.mainInfoText, {fontSize: 14}]}>Особые приметы, предпочтения, описание проекта</Text>
                     </GradientBlock>
+                    <View style={[styles.infoBlockCategory, {width: '100%', minHeight: 80, alignItems: 'center'}]}>
+                        <Text>{info.signs} </Text>
+                    </View>
                 </View>
+                <Text style={{marginTop: 10}}>Дополнительное описание</Text>
 
                 <View style={[styles.infoBlock, {marginTop: 20}]}>
-                    <View style={styles.infoBlockCategory}><Text >Типаж внешности</Text></View>
-
-                    <GradientBlock colors="orange">
-                        <Text style={styles.mainInfoText}>Азиатский</Text>
-                    </GradientBlock>
+                    <View style={styles.infoBlockCategory}><Text style={styles.bold}>Вес</Text></View>
+                    <View style={styles.backGroundBlock}>
+                        <Text style={styles.mainInfoText}>{info.weight}</Text>
+                    </View>
                 </View>
                 <View style={styles.infoBlock}>
-                    <View style={styles.infoBlockCategory}><Text >Цвет глаз</Text></View>
-                    <GradientBlock>
-                        <Text style={styles.mainInfoText}>Голубые</Text>
-                    </GradientBlock>
+                    <View style={styles.infoBlockCategory}><Text style={styles.bold}>Цвет глаз</Text></View>
+                    <View style={styles.backGroundBlock}>
+                        <Text style={styles.mainInfoText}>{info.eye}</Text>
+                    </View>
                 </View>
                 <View style={styles.infoBlock}>
-                    <View style={styles.infoBlockCategory}><Text >Цвет волос</Text></View>
-                    <GradientBlock colors="orange">
-                        <Text style={styles.mainInfoText}>Шатен</Text>
-                    </GradientBlock>
+                    <View style={styles.infoBlockCategory}><Text style={styles.bold}>Цвет волос</Text></View>
+                    <View style={styles.backGroundBlock}>
+                        <Text style={styles.mainInfoText}>{info.hair}</Text>
+                    </View>
                 </View>
                 <View style={styles.infoBlock}>
-                    <View style={styles.infoBlockCategory}><Text >Особые приметы или предпочтения</Text></View>
-                    <GradientBlock>
-                        <Text style={styles.mainInfoText}>глаза темные, кожа светлая, много морщин вокруг глаз, на коже раздражение («как после бритья»), «обвисшие щеки». Нос крупный («картошкой»).</Text>
-                    </GradientBlock>
+                    <View style={styles.infoBlockCategory}><Text style={styles.bold}>Знание языков</Text></View>
+                    <View style={styles.backGroundBlock}>
+                        <Text style={styles.mainInfoText}>{info.language}</Text>
+                    </View>
                 </View>
-                <View style={styles.infoBlock}>
-                    <View style={styles.infoBlockCategory}><Text >Знания языков</Text></View>
-                    <GradientBlock colors="orange">
-                        <Text style={styles.mainInfoText} >Казахский, Русский, Английский</Text>
-                    </GradientBlock>
-                </View>
-                <View style={styles.infoBlock}>
-                    <View style={styles.infoBlockCategory}><Text >Город</Text></View>
-                    <GradientBlock>
-                        <Text style={styles.mainInfoText}>Алматы</Text>
-                    </GradientBlock>
-                </View>
-                <View style={styles.infoBlock}>
-                    <View style={styles.infoBlockCategory}><Text >Опыт работы</Text></View>
-                    <GradientBlock colors="orange">
-                        <Text style={styles.mainInfoText}>58</Text>
-                    </GradientBlock>
-                </View>
-
-
-                <GradientBlock marginTop="20">
-                    <Text style={[styles.mainInfoText, styles.bold]}>{info?.phone}</Text>
-                </GradientBlock>
-                <GradientBlock marginTop="10" >
-                    <Text style={[styles.mainInfoText, styles.bold]}>{info?.email}</Text>
-                </GradientBlock>
 
             </View >
         </ScrollView>
@@ -128,6 +142,17 @@ const styles = StyleSheet.create({
         marginTop: 20,
         width: '100%'
     },
+    backGroundBlock: {
+        flex: 3,
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 10,
+        paddingTop: 8,
+        width: '100%',
+        borderRadius: 15,
+        color: '#ffffff',
+        backgroundColor: 'grey'
+    },
     infoBlock: {
         flex: 1,
         width: '100%',
@@ -144,6 +169,7 @@ const styles = StyleSheet.create({
     infoBlockCategory: {
         width: '34%',
         fontSize: 14,
+        flex: 2,
         justifyContent: 'center',
         paddingLeft: 10,
 
@@ -155,9 +181,9 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     logo: {
-        borderRadius: 160 / 2,
-        width: 160,
-        height: 160
+        width: '100%',
+        height: 160,
+        marginTop: 20
     }
 })
 

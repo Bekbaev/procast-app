@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {fetchMyCastings} from "../redux/reducers/asyncReducer";
 
 
-export default function MyCastings() {
+export default function MyCastings({navigation}) {
     const castingsArray = useSelector(state => state.castingsReducer.myCastings);
     const dispatch = useDispatch()
 
@@ -22,7 +22,7 @@ export default function MyCastings() {
         <ScrollView>
             <View style={styles.container}>
 
-                { castingsArray.map(c => <CastingBlock key={c._id} casting={c} dispatch={dispatch}/>) }
+                { castingsArray.map(c => <CastingBlock navigation={navigation} key={c._id} casting={c} dispatch={dispatch}/>) }
             </View >
         </ScrollView>
     );

@@ -49,7 +49,7 @@ export default function SavedCastingsScreen({navigation }) {
                 {/*    </LinearGradient>*/}
                 {/*</View>*/}
 
-                { castingsArray.map(casting => <CastingBlock key={casting.id} casting={casting} dispatch={dispatch} />) }
+                { castingsArray.map(casting => <CastingBlock navigation={navigation} key={casting._id} casting={casting} dispatch={dispatch} />) }
 
             </View >
         </ScrollView>
