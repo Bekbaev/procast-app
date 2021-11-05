@@ -19,7 +19,7 @@ export default function App() {
     const isAuth = async () => {
         try {
             const token = await AsyncStorage.getItem('token')
-            if(token != 0){
+            if(token != 0 || !token){
                 instance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
                 const info = await authApi.getMe()
                 await AsyncStorage.setItem('user_id', info._id)
@@ -76,7 +76,7 @@ export default function App() {
     return (
         <>
             {
-                showAuthScreen === '0'
+                showAuthScreen == '0'
                     ? <AuthScreen register={register} singIn={singIn} errorText={errorText}/>
                     : <SplashScreen singOut={singOut}/>
             }

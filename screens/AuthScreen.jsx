@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Image, ImageBackground, ScrollView, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {Image,KeyboardAvoidingView,Platform, ImageBackground, Keyboard, StyleSheet, TouchableWithoutFeedback, TouchableOpacity, View} from "react-native";
 import Auth from "../components/Auth/Auth";
 import Register from "../components/Auth/Register";
 
@@ -8,20 +8,27 @@ const AuthScreen = ({singIn, errorText, register}) => {
     const [showRegistration, setShowRegistration] = useState(false)
 
     return (
-        <View style={styles.container}>
+        <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            style={styles.container}
+        >
                 <ImageBackground source={require('../assets/bg.jpg')} resizeMode="stretch" style={styles.image}>
-                    <Image
-                        style={[styles.logo, {marginTop: showRegistration ? '15%' : '40%'}]}
-                        source={require('../assets/logo.png')}
-                    />
-                    {
-                        showRegistration
-                            ? <Register register={register} errorText={errorText} setShowRegistration={setShowRegistration} singIn={singIn}/>
-                            : <Auth errorText={errorText} setShowRegistration={setShowRegistration} singIn={singIn}/>
-                    }
+                    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                        <View style={styles.inner}>
+                            <Image
+                                style={[styles.logo]}
+                                source={require('../assets/logo.png')}
+                            />
+                            {
+                                showRegistration
+                                    ? <Register register={register} errorText={errorText} setShowRegistration={setShowRegistration} singIn={singIn}/>
+                                    : <Auth errorText={errorText} setShowRegistration={setShowRegistration} singIn={singIn}/>
+                            }
+                        </View>
+                    </TouchableWithoutFeedback>
 
                 </ImageBackground>
-        </View>
+        </KeyboardAvoidingView>
     );
 };
 const styles = StyleSheet.create({
@@ -33,6 +40,13 @@ const styles = StyleSheet.create({
       height: 80,
       resizeMode: 'stretch',
       marginBottom: 40,
+    },
+    inner: {
+        padding: 1,
+        flex: 1,
+        justifyContent: "center",
+        alignItems: 'center',
+        width: '100%'
     },
     image: {
         flex: 1,

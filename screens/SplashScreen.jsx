@@ -11,15 +11,12 @@ import CreateCasting from "./CreateCasting";
 import {useSelector} from "react-redux";
 import MyCastings from "./MyCastings";
 import CastingScreen from "./CastingsScreen";
+import UserResponsesScreen from "./UserResponsesScreen";
 
 const Drawer = createDrawerNavigator();
 
 const SplashScreen = (props) => {
     const role = useSelector(state => state.userReducer.role);
-
-    if (!role) {
-        return <></>
-    }
 
 
     return (
@@ -39,20 +36,25 @@ const SplashScreen = (props) => {
                     },
 
                 }} initialRouteName="Главная">
-                <Drawer.Screen name="Главная" component={HomeScreen}/>
+                <Drawer.Screen name="Главная" component={  HomeScreen}/>
                 {role === '1' && <Drawer.Screen name="Мои кастинги" component={MyCastings}/>}
                 <Drawer.Screen name="Профиль" component={ProfileScreen}/>
                 {role === '0' && <Drawer.Screen name="Отклики на роли" component={ResponsesScreen}/>}
                 {role === '0' && <Drawer.Screen name="Сохраненые кастинги" component={SavedCastingsScreen}/>}
                 <Drawer.Screen name="Настройки" component={SettingsScreen}/>
-                <Drawer.Screen name="CastingScreen" component={CastingScreen} options={{
-                    title: 'Подробнее',
-                    drawerItemStyle: {height: 0}
-                }}/>
                 {role === '1' && <Drawer.Screen name="Создать кастинг" component={CreateCasting}/>}
                 <Drawer.Screen name="Выйти">
                     {() => <ExitScreen singOut={props.singOut}/>}
                 </Drawer.Screen>
+
+                <Drawer.Screen name="CastingScreen" component={CastingScreen} options={{
+                    title: 'Подробнее',
+                    drawerItemStyle: {height: 0}
+                }} />
+                <Drawer.Screen name="UserResponsesScreen" component={ UserResponsesScreen } options={{
+                    title: 'Отклики',
+                    drawerItemStyle: {height: 0}
+                }} />
             </Drawer.Navigator>
         </NavigationContainer>
     );

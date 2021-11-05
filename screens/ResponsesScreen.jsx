@@ -52,9 +52,6 @@ export default function ResponsesScreen({navigation }) {
                         </View>
                     </View>
                 </GradientBlock>)}
-
-
-
             </View >
         </ScrollView>
     );

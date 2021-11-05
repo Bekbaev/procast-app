@@ -10,7 +10,7 @@ import { useSelector} from "react-redux";
 import {createRequest, deleteRequest} from "../redux/reducers/asyncReducer";
 
 
-export default function CastingBlock({casting, dispatch, navigation}) {
+export default function CastingBlock({casting, dispatch, navigation, myCasting = false}) {
     const gradientColors = ['#dc4a5b', '#f5552b', '#f58e3c']
     const gradientColorsAdded = ['#e1a64f', '#ffaf2c', '#fff82a']
     const castingId = casting._id
@@ -22,6 +22,12 @@ export default function CastingBlock({casting, dispatch, navigation}) {
         } else {
             dispatch(createRequest(castingId))
         }
+    }
+    const toResponses = () => {
+        navigation.navigate('UserResponsesScreen', {
+            id: id,
+            name: casting.name
+        })
     }
 
     const handleFavorite = () => {
@@ -123,6 +129,18 @@ export default function CastingBlock({casting, dispatch, navigation}) {
                     </LinearGradient>
                 </TouchableOpacity>
             }
+            {myCasting &&
+                <TouchableOpacity
+                    style={styles.sendRequestButtonWrapper}
+                    onPress={ toResponses }
+                >
+                    <View
+                        style={styles.toResponsesButton}
+                    >
+                        <Text style={styles.sendRequestText}>Отклики</Text>
+                    </View>
+                </TouchableOpacity>
+            }
 
         </View>
     );
@@ -141,6 +159,15 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         height: 40,
         marginTop: 10
+    },
+    toResponsesButton: {
+        width: '100%',
+        borderRadius: 15,
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: 40,
+        marginTop: 10,
+        backgroundColor: 'rgba(24,140,0,0.6)'
     },
     photo: {
         width: '100%',

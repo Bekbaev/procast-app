@@ -22,7 +22,7 @@ export default function MyCastings({navigation}) {
         <ScrollView>
             <View style={styles.container}>
 
-                { castingsArray.map(c => <CastingBlock navigation={navigation} key={c._id} casting={c} dispatch={dispatch}/>) }
+                { castingsArray.map(c => <CastingBlock myCasting navigation={navigation} key={c._id} casting={c} dispatch={dispatch}/>) }
             </View >
         </ScrollView>
     );
