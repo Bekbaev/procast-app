@@ -1,4 +1,5 @@
 import {Alert} from "react-native";
+import {act} from "react-dom/test-utils";
 
 const initialState = {
     castings: [
@@ -39,6 +40,15 @@ const castingsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isLoading: action.payload
+            }
+        }
+
+        case `SEARCH_CASTING`: {
+            const newCastings = state.castings.filter(c => c.name.toUpperCase().includes(action.payload.toUpperCase()))
+
+            return {
+                ...state,
+                castings: newCastings
             }
         }
 
@@ -141,5 +151,11 @@ export const handleLoad = (payload) => ({
     type: 'HANDLE_LOAD',
     payload: payload
 });
+
+export const searchCasting = (payload) => ({
+    type: 'SEARCH_CASTING',
+    payload: payload
+});
+
 
 export default castingsReducer;

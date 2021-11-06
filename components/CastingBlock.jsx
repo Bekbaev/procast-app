@@ -25,8 +25,8 @@ export default function CastingBlock({casting, dispatch, navigation, myCasting =
     }
     const toResponses = () => {
         navigation.navigate('UserResponsesScreen', {
-            id: id,
-            name: casting.name
+            id: castingId,
+            name: casting.name,
         })
     }
 

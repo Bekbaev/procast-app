@@ -3,21 +3,18 @@ import {Image, ScrollView, StyleSheet, Text, View} from "react-native";
 import GradientBlock from "../components/GradientBlock";
 import ProfileCompletedBar from "../components/ProfileCompletedBar";
 import {authApi} from "../api/api";
-import {handleLoad} from "../redux/reducers/castingsReducer";
-import {useDispatch} from "react-redux";
 
 const ProfileScreen = () => {
     const [info, setInfo] = useState({})
-    const dispatch = useDispatch()
 
-    const getInfo = async () => {
+    const getMyInfo = async () => {
         const response = await authApi.getMe()
         setInfo(response)
     }
 
     useEffect(() => {
-        getInfo()
-    }, [])
+        getMyInfo()
+    }, )
 
 
     return (

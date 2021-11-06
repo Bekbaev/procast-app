@@ -4,18 +4,24 @@ import {LinearGradient} from "expo-linear-gradient";
 import CastingBlock from "../components/CastingBlock";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchCastings} from "../redux/reducers/asyncReducer";
+import {searchCasting} from "../redux/reducers/castingsReducer";
 
 
 export default function HomeScreen({navigation}) {
     const gradientColors = ['#dc4a5b', '#f5552b', '#f58e3c']
     const [searchText, setSearchText] = useState('')
+    const dispatch = useDispatch()
+    const castingsArray = useSelector(state => state.castingsReducer.castings);
+
     const search = (text) => {
+        if(text){
+            dispatch(searchCasting(text))
+        }else {
+            dispatch(fetchCastings())
+        }
+
         setSearchText(text)
     }
-
-    const castingsArray = useSelector(state => state.castingsReducer.castings);
-    const dispatch = useDispatch()
-
 
     useEffect(() => {
         dispatch(fetchCastings())

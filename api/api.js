@@ -18,6 +18,11 @@ export const authApi = {
         const {data} = await instance.get('getMe')
         return data
     },
+    async getUser(id) {
+        const {data} = await instance.get(`user/${id}`)
+        return data
+    },
+
 
 }
 
@@ -38,6 +43,10 @@ export const castingApi = {
         const {data} = await instance.get('castingRequested')
         return data
     },
+    async getRequested(id) {
+        const {data} = await instance.get(`getRequested/${id}`)
+        return data
+    },
     async create(obj) {
         try {
             const {data} = await instance.post('casting', obj)
@@ -48,6 +57,9 @@ export const castingApi = {
     },
     sendRequest(casting_id) {
         return instance.post(`request`, {casting_id: casting_id})
+    },
+    updateRequest(casting_id, user_id, status) {
+        return instance.put(`request`, {casting_id: casting_id, user_id: user_id, status: status})
     },
     removeRequest(casting_id) {
         return instance.delete(`request`, {data: {casting_id: casting_id}})

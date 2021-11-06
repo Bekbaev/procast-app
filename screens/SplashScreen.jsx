@@ -12,6 +12,7 @@ import {useSelector} from "react-redux";
 import MyCastings from "./MyCastings";
 import CastingScreen from "./CastingsScreen";
 import UserResponsesScreen from "./UserResponsesScreen";
+import UserProfileScreen from "./UserProfileScreen";
 
 const Drawer = createDrawerNavigator();
 
@@ -21,7 +22,6 @@ const SplashScreen = (props) => {
 
     return (
         <NavigationContainer>
-
             <Drawer.Navigator
                 screenOptions={{
                     headerStyle: {
@@ -36,7 +36,7 @@ const SplashScreen = (props) => {
                     },
 
                 }} initialRouteName="Главная">
-                <Drawer.Screen name="Главная" component={  HomeScreen}/>
+                <Drawer.Screen name="Главная" component={HomeScreen}/>
                 {role === '1' && <Drawer.Screen name="Мои кастинги" component={MyCastings}/>}
                 <Drawer.Screen name="Профиль" component={ProfileScreen}/>
                 {role === '0' && <Drawer.Screen name="Отклики на роли" component={ResponsesScreen}/>}
@@ -50,11 +50,15 @@ const SplashScreen = (props) => {
                 <Drawer.Screen name="CastingScreen" component={CastingScreen} options={{
                     title: 'Подробнее',
                     drawerItemStyle: {height: 0}
-                }} />
-                <Drawer.Screen name="UserResponsesScreen" component={ UserResponsesScreen } options={{
+                }}/>
+                <Drawer.Screen name="UserResponsesScreen" component={UserResponsesScreen} options={{
                     title: 'Отклики',
                     drawerItemStyle: {height: 0}
-                }} />
+                }}/>
+                <Drawer.Screen name="UserProfileScreen" component={UserProfileScreen} options={{
+                    title: 'Профиль',
+                    drawerItemStyle: {height: 0}
+                }}/>
             </Drawer.Navigator>
         </NavigationContainer>
     );

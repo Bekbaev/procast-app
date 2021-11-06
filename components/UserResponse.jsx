@@ -1,13 +1,24 @@
 import React from 'react';
-import {TouchableOpacity, StyleSheet, Text, View, Image, ScrollView} from "react-native";
+import {TouchableOpacity, StyleSheet, Text, View, Image} from "react-native";
+import {castingApi} from "../api/api";
 
 
-export default function UserResponse({navigation}) {
-
-
+export default function UserResponse(props) {
 
     const toProfile = () => {
+        props.navigation.navigate('UserProfileScreen', {
+            id: props._id
+        })
+    }
 
+    const accept = async () => {
+        await castingApi.updateRequest(props.casting_id, props._id, 1)
+        props.getUsers()
+    }
+
+    const decline = async () => {
+        await castingApi.updateRequest(props.casting_id, props._id, 2)
+        props.getUsers()
     }
 
     return (
@@ -22,24 +33,23 @@ export default function UserResponse({navigation}) {
                     />
                 </View>
                 <View style={styles.responseLeftWrapper}>
-                    <Text style={styles.responseInfoName}>Бекбаев Бактияр Серикович</Text>
+                    <Text style={styles.responseInfoName}>{props.name}</Text>
                     <View style={styles.responseInfo}>
-                        <Text>Возраст: 21</Text>
-                        <Text>Рост: 191
-                        </Text>
+                        <Text>Возраст: </Text>
+                        <Text>Рост: </Text>
                     </View>
                 </View>
             </View>
 
             <View style={styles.responseButtons}>
                 <TouchableOpacity style={styles.responseButton}>
-                    <Text style={styles.responseButtonText}>Анкета</Text>
+                    <Text onPress={toProfile} style={styles.responseButtonText}>Анкета</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.responseButton}>
-                    <Text style={styles.responseButtonText}>Пригласить</Text>
+                    <Text onPress={accept} style={styles.responseButtonText}>Пригласить</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.responseButton}>
-                    <Text style={styles.responseButtonText}>Отклонить</Text>
+                    <Text onPress={decline} style={styles.responseButtonText}>Отклонить</Text>
                 </TouchableOpacity>
             </View>
         </View>

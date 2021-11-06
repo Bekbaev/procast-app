@@ -19,6 +19,28 @@ export default function ResponsesScreen({navigation }) {
         return <><Text>Тут будет загрузка</Text></>
     }
 
+    const getResponseText = (status) => {
+        switch (status){
+            case 0:
+                return 'Заяка подана'
+            case 1:
+                return 'Заявка принята, с вами скоро свяжутся'
+            case 2:
+                return 'Заявка отклонена, текст с утешением '
+        }
+    }
+
+    const getResponseStatusColor = (status) => {
+        switch (status){
+            case 0:
+                return '#959595'
+            case 1:
+                return '#47d252'
+            case 2:
+                return '#ff0000'
+        }
+    }
+
     return (
         <ScrollView>
             <View style={styles.container}>
@@ -46,8 +68,8 @@ export default function ResponsesScreen({navigation }) {
                         </View>
 
                         <View style={styles.responseStatusWrapper}>
-                            <View style={[styles.responseStatus, {backgroundColor: c.status == '0' ? '#959595' : '#47d252'}]}>
-                                <Text style={styles.responseStatusText}>{c.status == '0' ? 'Заяка подана' : 'Заявка принята, с вами скоро свяжутся'}</Text>
+                            <View style={[styles.responseStatus, {backgroundColor: getResponseStatusColor(c.status)}]}>
+                                <Text style={styles.responseStatusText}>{getResponseText(c.status) }</Text>
                             </View>
                         </View>
                     </View>
