@@ -10,27 +10,23 @@ import {useDispatch} from "react-redux";
 import {addCasting} from "../redux/reducers/castingsReducer";
 import {createCasting} from "../redux/reducers/asyncReducer";
 
-const CreateCasting = () => {
+const FillProfileScreen = () => {
     const gradientColors = ['#dc4a5b', '#f5552b', '#f58e3c']
     const dispatch = useDispatch()
 
-    const [city, setCity] = useState('Павлодар')
+    const [city, setCity] = useState('Pavlodar')
     const [name, setName] = useState('')
-    const [category, setCategory] = useState('Фильм')
-    const [sex, setSex] = useState('Мужской')
-    const [type, setType] = useState('Роль')
-    const [duration, setDuration] = useState('Смена')
-    const [race, setRace] = useState('Азиатский')
-    const [eye, setEye] = useState('Карий')
-    const [hair, setHair] = useState('Блонд')
+    const [sex, setSex] = useState('male')
+    const [race, setRace] = useState('asian')
+    const [eye, setEye] = useState('brown')
+    const [hair, setHair] = useState('blond')
     const [height, setHeight] = useState('')
     const [weight, setWeight] = useState('')
-    const [language, setLanguage] = useState('Казахский')
+    const [language, setLanguage] = useState('english')
     const [date, setDate] = useState(new Date(1598051730000));
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
     const [signs, setSigns] = useState('');
-    const [payment, setPayment] = useState('');
 
 
     const onChange = (event, selectedDate) => {
@@ -42,18 +38,15 @@ const CreateCasting = () => {
     const createNewCasting = () => {
         const newCasting = {
             'name': name,
-            'payment': payment,
             'city': city,
             'start_date': `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`,
             'image': 'https://www.sion-consulting.com/wp-content/themes/consultix/images/no-image-found-360x250.png',
             'category': category,
-            'type': type,
             'gender': sex,
             'race': race,
             'eye': eye,
             'hair': hair,
             'language': language,
-            'duration': duration,
             'weight': weight,
             'height': height,
             'signs': signs,
@@ -86,14 +79,14 @@ const CreateCasting = () => {
                     <TextInput
                         style={styles.input}
                         value={name} onChangeText={text => setName(text)}
+                        placeholder="К прим. Искаков Дастан Толегенович"
                     />
-                    <Text style={styles.castingName} >Заполнитие
-                        название проекта</Text>
+                    <Text style={styles.castingName} >Заполните ваше ФИО </Text>
                 </LinearGradient>
                 <GradientBlock marginTop="5" colors='orange'>
                     <View style={styles.formWrapper}>
                         <Text style={styles.formTitle}>
-                            Дата начала сьемок
+                            Дата Рождения
                         </Text>
                         <View style={styles.dateWrapper}>
                             <Text onPress={() => setShow(true)}
@@ -114,23 +107,7 @@ const CreateCasting = () => {
                         </View>
                     </View>
                 </GradientBlock>
-                <GradientBlock marginTop="5" colors='orange'>
-                    <View style={styles.formWrapper}>
-                        <Text style={styles.formTitle}>
-                            Категория проекта
-                        </Text>
-                        <View style={styles.pickerWrapper}>
-                            <Picker style={styles.picker} value={category}
-                                    selectedValue={category}
-                                    onValueChange={itemValue => setCategory(itemValue)}
-                            >
-                                {castingTypes.category.map((el, i) => <Picker.Item key={i} label={el.name}
-                                                                                   value={el.value}/>)}
-                            </Picker>
-                        </View>
-                    </View>
-                </GradientBlock>
-                <GradientBlock marginTop="5">
+                <GradientBlock marginTop="5" colors="orange">
                     <View style={styles.formWrapper}>
                         <Text style={styles.formTitle}>
                             Пол
@@ -140,59 +117,14 @@ const CreateCasting = () => {
                                     selectedValue={sex}
                                     onValueChange={itemValue => setSex(itemValue)}
                             >
-                                <Picker.Item label="Мужчина" value="male"/>
-                                <Picker.Item label="Женщина" value="famale"/>
+                                <Picker.Item label="Мужчина" value="Мужчина"/>
+                                <Picker.Item label="Женщина" value="Женщина"/>
                             </Picker>
                         </View>
                     </View>
                 </GradientBlock>
-                <GradientBlock marginTop="5" colors='orange'>
-                    <View style={styles.formWrapper}>
-                        <Text style={styles.formTitle}>
-                            Тип работы
-                        </Text>
-                        <View style={styles.pickerWrapper}>
-                            <Picker style={styles.picker}
-                                    selectedValue={type}
-                                    onValueChange={itemValue => setType(itemValue)}
-                            >
-                                {castingTypes.type.map((el, i) => <Picker.Item key={i} label={el.name}
-                                                                               value={el.value}/>)}
-                            </Picker>
-                        </View>
-                    </View>
-                </GradientBlock>
-                <GradientBlock marginTop="5">
-                    <View style={styles.formWrapper}>
-                        <Text style={styles.formTitle}>
-                            Длительность
-                        </Text>
-                        <View style={styles.pickerWrapper}>
-                            <Picker style={styles.picker}
-                                    selectedValue={duration}
-                                    onValueChange={itemValue => setDuration(itemValue)}
-                            >
-                                {castingTypes.duration.map((el, i) => <Picker.Item key={i} label={el.name}
-                                                                                   value={el.value}/>)}
-                            </Picker>
-                        </View>
-                    </View>
-                </GradientBlock>
-                <GradientBlock marginTop="5" colors='orange'>
-                    <View style={styles.formWrapper}>
-                        <Text style={styles.formTitle}>
-                            Оплата
-                        </Text>
-                        <TextInput
-                            editable
-                            maxLength={40}
-                            style={styles.FormInput}
-                            keyboardType='numeric'
-                            value={payment}
-                            onChangeText={text => setPayment(text)}
-                        />
-                    </View>
-                </GradientBlock>
+
+
                 <LinearGradient
                     colors={gradientColors}
                     start={{x: 0, y: 0}}
@@ -206,7 +138,7 @@ const CreateCasting = () => {
                     />
 
                 </LinearGradient>
-                <Text style={styles.castingName}>Дополнительные параметры кастинга</Text>
+                <Text style={styles.castingName}>Дополнительные параметры</Text>
                 <GradientBlock marginTop="5">
                     <View style={styles.formWrapper}>
                         <Text style={styles.formTitle}>
@@ -421,4 +353,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default CreateCasting;
+export default FillProfileScreen;

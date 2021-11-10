@@ -13,6 +13,7 @@ import MyCastings from "./MyCastings";
 import CastingScreen from "./CastingsScreen";
 import UserResponsesScreen from "./UserResponsesScreen";
 import UserProfileScreen from "./UserProfileScreen";
+import FillProfileScreen from "./FillProfileScreen";
 
 const Drawer = createDrawerNavigator();
 
@@ -36,7 +37,7 @@ const SplashScreen = (props) => {
                     },
 
                 }} initialRouteName="Главная">
-                <Drawer.Screen name="Главная" component={HomeScreen}/>
+                <Drawer.Screen name="Главная" component={ FillProfileScreen }/>
                 {role === '1' && <Drawer.Screen name="Мои кастинги" component={MyCastings}/>}
                 <Drawer.Screen name="Профиль" component={ProfileScreen}/>
                 {role === '0' && <Drawer.Screen name="Отклики на роли" component={ResponsesScreen}/>}

@@ -62,7 +62,6 @@ export const deleteRequest = (id) => {
 export const createCasting = (newCasting) => {
     return async dispatch => {
         dispatch(handleLoad(true))
-        alert(JSON.stringify(newCasting))
         const casting = await castingApi.create(newCasting)
         dispatch(handleLoad(false))
         return true
