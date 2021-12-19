@@ -37,7 +37,7 @@ const SplashScreen = (props) => {
                     },
 
                 }} initialRouteName="Главная">
-                <Drawer.Screen name="Главная" component={ FillProfileScreen }/>
+                <Drawer.Screen name="Главная" component={ HomeScreen }/>
                 {role === '1' && <Drawer.Screen name="Мои кастинги" component={MyCastings}/>}
                 <Drawer.Screen name="Профиль" component={ProfileScreen}/>
                 {role === '0' && <Drawer.Screen name="Отклики на роли" component={ResponsesScreen}/>}
@@ -48,18 +48,24 @@ const SplashScreen = (props) => {
                     {() => <ExitScreen singOut={props.singOut}/>}
                 </Drawer.Screen>
 
-                <Drawer.Screen name="CastingScreen" component={CastingScreen} options={{
+                <Drawer.Screen name="CastingScreen" component={ CastingScreen } options={{
                     title: 'Подробнее',
                     drawerItemStyle: {height: 0}
                 }}/>
-                <Drawer.Screen name="UserResponsesScreen" component={UserResponsesScreen} options={{
+                <Drawer.Screen name="UserResponsesScreen" component={ UserResponsesScreen } options={{
                     title: 'Отклики',
                     drawerItemStyle: {height: 0}
                 }}/>
-                <Drawer.Screen name="UserProfileScreen" component={UserProfileScreen} options={{
+                <Drawer.Screen name="UserProfileScreen" component={ UserProfileScreen } options={{
                     title: 'Профиль',
                     drawerItemStyle: {height: 0}
                 }}/>
+
+                <Drawer.Screen name="FillProfileScreen" component={ FillProfileScreen } options={{
+                    title: 'Профиль',
+                    drawerItemStyle: {height: 0}
+                }}/>
+
             </Drawer.Navigator>
         </NavigationContainer>
     );

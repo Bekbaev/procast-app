@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {ScrollView, StyleSheet, Text, TextInput, View, Picker, TouchableOpacity} from "react-native";
+import {ScrollView, StyleSheet, Text, TextInput, View, Picker, TouchableOpacity, Image} from "react-native";
 import {LinearGradient} from "expo-linear-gradient";
 import GradientBlock from "../components/GradientBlock";
 import castingTypes from "../common/enums/createCasting_types"
@@ -9,6 +9,7 @@ import InputText from "../components/InputText";
 import {useDispatch} from "react-redux";
 import {addCasting} from "../redux/reducers/castingsReducer";
 import {createCasting} from "../redux/reducers/asyncReducer";
+import * as ImagePicker from "expo-image-picker";
 
 const CreateCasting = () => {
     const gradientColors = ['#dc4a5b', '#f5552b', '#f58e3c']
@@ -31,7 +32,7 @@ const CreateCasting = () => {
     const [show, setShow] = useState(false);
     const [signs, setSigns] = useState('');
     const [payment, setPayment] = useState('');
-
+    const [image, setImage] = useState(null);
 
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;
@@ -62,6 +63,21 @@ const CreateCasting = () => {
         dispatch(createCasting(newCasting))
 
     }
+
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+        });
+
+        console.log(result);
+
+        if (!result.cancelled) {
+            setImage(result.uri);
+        }
+    };
 
     return (
         <ScrollView>
@@ -193,6 +209,11 @@ const CreateCasting = () => {
                         />
                     </View>
                 </GradientBlock>
+                <View style={styles.addPhotoButton}  >
+                    <Text style={styles.addPhotoButtonText} onPress={pickImage}>Добавить фото</Text>
+                </View>
+
+                {image && <Image source={{ uri: image }} style={{ width: '96%', height: 300 }} />}
                 <LinearGradient
                     colors={gradientColors}
                     start={{x: 0, y: 0}}
@@ -409,6 +430,18 @@ const styles = StyleSheet.create({
         borderRadius: 10
     },
     buttonText: {
+        textAlign: 'center',
+        color: '#ffffff',
+    },
+    addPhotoButton: {
+        marginTop: 10,
+        backgroundColor: '#898989',
+        width: '98%',
+        padding: 14,
+        marginBottom: 20,
+        borderRadius: 10
+    },
+    addPhotoButtonText: {
         textAlign: 'center',
         color: '#ffffff',
     },

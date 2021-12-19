@@ -26,7 +26,7 @@ export default function ResponsesScreen({navigation }) {
             case 1:
                 return 'Заявка принята, с вами скоро свяжутся'
             case 2:
-                return 'Заявка отклонена, текст с утешением '
+                return 'Заявка отклонена '
         }
     }
 

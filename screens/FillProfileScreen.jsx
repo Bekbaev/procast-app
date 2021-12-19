@@ -1,14 +1,13 @@
 import React, {useState} from 'react';
-import {ScrollView, StyleSheet, Text, TextInput, View, Picker, TouchableOpacity} from "react-native";
+import {ScrollView, StyleSheet, Text, TextInput, View, Picker, TouchableOpacity, Button, Image} from "react-native";
 import {LinearGradient} from "expo-linear-gradient";
 import GradientBlock from "../components/GradientBlock";
 import castingTypes from "../common/enums/createCasting_types"
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {Ionicons} from "@expo/vector-icons";
-import InputText from "../components/InputText";
 import {useDispatch} from "react-redux";
-import {addCasting} from "../redux/reducers/castingsReducer";
-import {createCasting} from "../redux/reducers/asyncReducer";
+import {createCasting} from "../redux/reducers/asyncReducer"
+import * as ImagePicker from 'expo-image-picker';;
 
 const FillProfileScreen = () => {
     const gradientColors = ['#dc4a5b', '#f5552b', '#f58e3c']
@@ -27,6 +26,7 @@ const FillProfileScreen = () => {
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
     const [signs, setSigns] = useState('');
+    const [image, setImage] = useState(null);
 
 
     const onChange = (event, selectedDate) => {
@@ -53,8 +53,22 @@ const FillProfileScreen = () => {
         }
 
         dispatch(createCasting(newCasting))
-
     }
+
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+        });
+
+        console.log(result);
+
+        if (!result.cancelled) {
+            setImage(result.uri);
+        }
+    };
 
     return (
         <ScrollView>
@@ -107,6 +121,7 @@ const FillProfileScreen = () => {
                         </View>
                     </View>
                 </GradientBlock>
+
                 <GradientBlock marginTop="5" colors="orange">
                     <View style={styles.formWrapper}>
                         <Text style={styles.formTitle}>
@@ -124,6 +139,11 @@ const FillProfileScreen = () => {
                     </View>
                 </GradientBlock>
 
+                <View style={styles.addPhotoButton}  >
+                    <Text style={styles.addPhotoButtonText} onPress={pickImage}>Добавить фото</Text>
+                </View>
+
+                {image && <Image source={{ uri: image }} style={{ width: '96%', height: 300 }} />}
 
                 <LinearGradient
                     colors={gradientColors}
@@ -254,6 +274,18 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         marginTop: 10,
         backgroundColor: '#ffffff'
+    },
+    addPhotoButton: {
+        marginTop: 10,
+        backgroundColor: '#898989',
+        width: '98%',
+        padding: 14,
+        marginBottom: 20,
+        borderRadius: 10
+    },
+    addPhotoButtonText: {
+        textAlign: 'center',
+        color: '#ffffff',
     },
     dateWrapper: {
         height: 40,

@@ -8,7 +8,6 @@ export const authApi = {
         } catch (e) {
             alert(e)
         }
-
     },
     async registration(obj) {
         const {data} = await instance.post('registration', obj)
@@ -22,8 +21,6 @@ export const authApi = {
         const {data} = await instance.get(`user/${id}`)
         return data
     },
-
-
 }
 
 export const castingApi = {

@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {Image, ScrollView, StyleSheet, Text, View} from "react-native";
+import {Image, ScrollView, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import GradientBlock from "../components/GradientBlock";
 import ProfileCompletedBar from "../components/ProfileCompletedBar";
 import {authApi} from "../api/api";
 
-const ProfileScreen = () => {
+const ProfileScreen = ({navigation}) => {
     const [info, setInfo] = useState({})
 
     const getMyInfo = async () => {
@@ -31,6 +31,9 @@ const ProfileScreen = () => {
                     <Text style={[styles.mainInfoText, styles.bold]}>{info?.name}</Text>
                 </GradientBlock>
                 <ProfileCompletedBar percent={100} />
+                <TouchableOpacity style={styles.buttonWrapper}>
+                    <Text onPress={() => navigation.navigate('FillProfileScreen')} style={styles.buttonText}>Заполнить профиль</Text>
+                </TouchableOpacity>
 
                 <View style={[styles.infoBlock, {marginTop: 20}]}>
                     <View style={styles.infoBlockCategory}><Text style={styles.bold}>Возраст</Text></View>
@@ -156,6 +159,18 @@ const styles = StyleSheet.create({
         borderRadius: 160 / 2,
         width: 160,
         height: 160
+    },
+    buttonWrapper: {
+        backgroundColor: '#898989',
+        width: '98%',
+        padding: 14,
+        borderRadius: 15,
+        marginTop: 10
+    },
+    buttonText: {
+        textAlign: 'center',
+        color: '#ffffff',
+        fontSize: 15
     }
 })
 
