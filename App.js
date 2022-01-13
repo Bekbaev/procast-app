@@ -13,7 +13,7 @@ import {setRole} from "./redux/reducers/userReducer";
 export default function App() {
     const [showAuthScreen, setShowAuthScreen] = useState(false)
     const [errorText, setErrorText] = useState({auth: '', register: ''})
-    const isLoading = useSelector(state => state.castingsReducer.isLoading);
+    const isLoading = useSelector(state => state?.castingsReducer.isLoading);
     const dispatch = useDispatch()
 
     const isAuth = async () => {

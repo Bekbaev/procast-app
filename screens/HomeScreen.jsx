@@ -6,6 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {fetchCastings} from "../redux/reducers/asyncReducer";
 import {searchCasting} from "../redux/reducers/castingsReducer";
 import FilterSwiper from "../components/FilterSwiper";
+import FilterButtons from "../components/FilterButtons";
 
 
 export default function HomeScreen({navigation}) {
@@ -59,6 +60,7 @@ export default function HomeScreen({navigation}) {
                     <Text style={styles.blockTitle}>Категории </Text>
                     <FilterSwiper />
                 </LinearGradient>
+                <FilterButtons />
 
 
                 { castingsArray.map(c => <CastingBlock navigation={navigation} key={c._id} casting={c} dispatch={dispatch}/>) }

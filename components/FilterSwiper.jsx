@@ -57,7 +57,7 @@ export default class FilterSwiper extends React.Component {
                     justifyContent: 'center',
                     alignItems: 'center'
                 }}>
-                    <Image style={{ width: '55%', height: 53, resizeMode: 'stretch', }} source={item.icon} />
+                    <Image style={{ width: '53%', height: 45, resizeMode: 'stretch', }} source={item.icon} />
                 </View>
                 <Text style={{textAlign: 'center'}}>{item.text}</Text>
                 </>
@@ -74,7 +74,7 @@ export default class FilterSwiper extends React.Component {
                         ref={ref => this.carousel = ref}
                         data={this.state.carouselItems}
                         sliderWidth={SLIDER_WIDTH / 1.12}
-                        itemWidth={80}
+                        itemWidth={90}
                         loop={true}
                         contentContainerCustomStyle={{overflow: 'hidden', width: ITEM_WIDTH * (5)}}
                         inactiveSlideOpacity={1}

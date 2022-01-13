@@ -5,9 +5,7 @@ import GradientBlock from "../components/GradientBlock";
 import castingTypes from "../common/enums/createCasting_types"
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {Ionicons} from "@expo/vector-icons";
-import InputText from "../components/InputText";
 import {useDispatch} from "react-redux";
-import {addCasting} from "../redux/reducers/castingsReducer";
 import {createCasting} from "../redux/reducers/asyncReducer";
 import * as ImagePicker from "expo-image-picker";
 
@@ -33,6 +31,7 @@ const CreateCasting = () => {
     const [signs, setSigns] = useState('');
     const [payment, setPayment] = useState('');
     const [image, setImage] = useState(null);
+    const [imageFile, setImageFile] = useState(null);
 
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;
@@ -46,7 +45,7 @@ const CreateCasting = () => {
             'payment': payment,
             'city': city,
             'start_date': `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`,
-            'image': 'https://www.sion-consulting.com/wp-content/themes/consultix/images/no-image-found-360x250.png',
+            'image_file': imageFile,
             'category': category,
             'type': type,
             'gender': sex,
@@ -59,7 +58,7 @@ const CreateCasting = () => {
             'height': height,
             'signs': signs,
         }
-
+        alert(imageFile)
         dispatch(createCasting(newCasting))
 
     }
@@ -72,10 +71,9 @@ const CreateCasting = () => {
             quality: 1,
         });
 
-        console.log(result);
-
         if (!result.cancelled) {
             setImage(result.uri);
+            setImageFile(result.base64);
         }
     };
 

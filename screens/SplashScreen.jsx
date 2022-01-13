@@ -14,6 +14,7 @@ import CastingScreen from "./CastingsScreen";
 import UserResponsesScreen from "./UserResponsesScreen";
 import UserProfileScreen from "./UserProfileScreen";
 import FillProfileScreen from "./FillProfileScreen";
+import FiltersScreen from "./FiltersScreen";
 
 const Drawer = createDrawerNavigator();
 
@@ -63,6 +64,11 @@ const SplashScreen = (props) => {
 
                 <Drawer.Screen name="FillProfileScreen" component={ FillProfileScreen } options={{
                     title: 'Профиль',
+                    drawerItemStyle: {height: 0}
+                }}/>
+
+                <Drawer.Screen name="FiltersScreen" component={ FiltersScreen } options={{
+                    title: 'Фильтры',
                     drawerItemStyle: {height: 0}
                 }}/>
 

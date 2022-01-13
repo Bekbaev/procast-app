@@ -62,3 +62,10 @@ export const castingApi = {
         return instance.delete(`request`, {data: {casting_id: casting_id}})
     },
 }
+
+export const fileApi = {
+    async saveFile(fd) {
+        const {data} = await instance.post('http://food-j.kz/upload.php', fd)
+        return data
+    }
+}

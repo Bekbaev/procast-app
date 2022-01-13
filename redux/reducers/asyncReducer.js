@@ -1,4 +1,4 @@
-import {castingApi} from "../../api/api";
+import {castingApi, fileApi} from "../../api/api";
 import {addCastings, addMyCastings, cancelRequest, handleLoad, sendRequest} from "./castingsReducer";
 import {AsyncStorage} from "react-native";
 
@@ -61,9 +61,17 @@ export const deleteRequest = (id) => {
 
 export const createCasting = (newCasting) => {
     return async dispatch => {
-        dispatch(handleLoad(true))
-        const casting = await castingApi.create(newCasting)
-        dispatch(handleLoad(false))
+        // dispatch(handleLoad(true))
+
+        //SAVE FILE
+        const fd = new FormData()
+        fd.append('image', newCasting.image_file)
+        const imageName = await fileApi.saveFile(fd)
+        newCasting.image = imageName
+
+        // const casting = await castingApi.create(newCasting)
+        // dispatch(handleLoad(false))
+        alert(newCasting.image_file)
         return true
     }
 }
