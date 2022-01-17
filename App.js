@@ -25,6 +25,7 @@ export default function App() {
                 await AsyncStorage.setItem('user_id', info._id)
                 dispatch(setRole(info.type))
             }
+
             setShowAuthScreen(token)
 
             dispatch(handleLoad(false))

@@ -23,30 +23,42 @@ export default class FilterSwiper extends React.Component {
                 {
                     title:"Item 1",
                     text: "Фильмы",
-                    icon: require('../assets/fi1.png')
+                    icon: require('../assets/fi1.png'),
+                    type: "Фильм",
+                    setFilterState: this.props.setFilterState
                 },
                 {
                     title:"Item 2",
                     text: "Сериалы",
-                    icon: require('../assets/fi2.png')
+                    icon: require('../assets/fi2.png'),
+                    type: "Сериал",
+                    setFilterState: this.props.setFilterState
                 },
                 {
                     title:"Item 3",
                     text: "Клипы",
-                    icon: require('../assets/fi3.png')
+                    icon: require('../assets/fi3.png'),
+                    type: "Клип",
+                    setFilterState: this.props.setFilterState
                 },
                 {
                     title:"Item 4",
                     text: "Театры",
-                    icon: require('../assets/fi4.png')
+                    icon: require('../assets/fi4.png'),
+                    type: "Театр",
+                    setFilterState: this.props.setFilterState
                 }
             ]
         }
     }
 
     _renderItem({item,index}){
+        const filterCastings = () => {
+            item.setFilterState(item.type)
+        }
+
         return (
-            <TouchableOpacity onPress={() => alert('321')}>
+            <TouchableOpacity onPress={ filterCastings }>
                 <>
                 <View style={{
                     backgroundColor:'rgba(42,42,42,0.75)',

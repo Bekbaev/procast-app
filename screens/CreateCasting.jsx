@@ -31,7 +31,6 @@ const CreateCasting = () => {
     const [signs, setSigns] = useState('');
     const [payment, setPayment] = useState('');
     const [image, setImage] = useState(null);
-    const [imageFile, setImageFile] = useState(null);
 
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;
@@ -40,12 +39,12 @@ const CreateCasting = () => {
     };
 
     const createNewCasting = () => {
+        // alert( JSON.stringify(imageFile) )
         const newCasting = {
             'name': name,
             'payment': payment,
             'city': city,
             'start_date': `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`,
-            'image_file': imageFile,
             'category': category,
             'type': type,
             'gender': sex,
@@ -58,8 +57,8 @@ const CreateCasting = () => {
             'height': height,
             'signs': signs,
         }
-        alert(imageFile)
-        dispatch(createCasting(newCasting))
+
+        dispatch(createCasting(newCasting, image))
 
     }
 
@@ -67,13 +66,12 @@ const CreateCasting = () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.Images,
             allowsEditing: true,
-            aspect: [4, 3],
+            aspect: [6, 4],
             quality: 1,
         });
 
         if (!result.cancelled) {
             setImage(result.uri);
-            setImageFile(result.base64);
         }
     };
 

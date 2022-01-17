@@ -13,7 +13,9 @@ export default function HomeScreen({navigation}) {
     const gradientColors = ['#dc4a5b', '#f5552b', '#f58e3c']
     const [searchText, setSearchText] = useState('')
     const dispatch = useDispatch()
-    const castingsArray = useSelector(state => state.castingsReducer.castings);
+    const [filterState, setFilterState] = useState('')
+    let castingsArray = useSelector(state => state.castingsReducer.castings);
+    const [filteredCastingsArray, setFilteredCastingsArray] = useState(castingsArray)
 
     const search = (text) => {
         if(text){
@@ -26,8 +28,12 @@ export default function HomeScreen({navigation}) {
     }
 
     useEffect(() => {
-        dispatch(fetchCastings())
-    }, [])
+        if(!castingsArray.length){
+            dispatch(fetchCastings())
+        }
+
+        setFilteredCastingsArray(castingsArray.filter(casting => casting.category.includes(filterState)))
+    }, [filterState, castingsArray])
 
     if(castingsArray.length == 0) {
         return <><Text>Тут будет загрузка</Text></>
@@ -58,12 +64,12 @@ export default function HomeScreen({navigation}) {
                     style={styles.filterWrapper}
                 >
                     <Text style={styles.blockTitle}>Категории </Text>
-                    <FilterSwiper />
+                    <FilterSwiper setFilterState={setFilterState}/>
                 </LinearGradient>
                 <FilterButtons />
 
 
-                { castingsArray.map(c => <CastingBlock navigation={navigation} key={c._id} casting={c} dispatch={dispatch}/>) }
+                { filteredCastingsArray.map(c => <CastingBlock navigation={navigation} key={c._id} casting={c} dispatch={dispatch}/>) }
             </View >
         </ScrollView>
     );

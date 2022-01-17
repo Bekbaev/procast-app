@@ -1,9 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Image, ScrollView, StyleSheet, Text, View} from "react-native";
 import GradientBlock from "../components/GradientBlock";
-import ProfileCompletedBar from "../components/ProfileCompletedBar";
 import { castingApi} from "../api/api";
-import {useDispatch} from "react-redux";
 import { useRoute } from '@react-navigation/native';
 
 const CastingScreen = () => {
@@ -19,7 +17,7 @@ const CastingScreen = () => {
 
     useEffect(() => {
         getInfo()
-    }, [])
+    }, [id])
 
 
     return (
@@ -32,7 +30,7 @@ const CastingScreen = () => {
                 <Image
                     style={styles.logo}
                     source={{
-                        uri: 'https://www.sion-consulting.com/wp-content/themes/consultix/images/no-image-found-360x250.png',
+                        uri: info.image,
                     }}
                 />
 

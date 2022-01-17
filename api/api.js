@@ -1,4 +1,5 @@
 import instance from "./instance";
+import axios from "axios";
 
 export const authApi = {
     async login(phone, password) {
@@ -65,7 +66,14 @@ export const castingApi = {
 
 export const fileApi = {
     async saveFile(fd) {
-        const {data} = await instance.post('http://food-j.kz/upload.php', fd)
+        const {data} = await axios({
+            method: 'post',
+            url: 'http://food-j.kz/upload.php',
+            data: fd,
+            headers: {
+                'Content-Type': `multipart/form-data; boundary=${fd._boundary}`,
+            },
+        });
         return data
     }
 }

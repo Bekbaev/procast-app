@@ -1,5 +1,4 @@
 import {Alert} from "react-native";
-import {act} from "react-dom/test-utils";
 
 const initialState = {
     castings: [
@@ -18,7 +17,6 @@ const initialState = {
     myCastings: [],
     isLoading: false
 };
-
 
 const castingsReducer = (state = initialState, action) => {
     switch (action.type) {

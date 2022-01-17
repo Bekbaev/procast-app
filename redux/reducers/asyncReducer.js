@@ -37,8 +37,6 @@ export const fetchRequestedCastings = () => {
             c.status = status
         })
 
-
-
         dispatch(addMyCastings(castings))
     }
 }
@@ -59,19 +57,22 @@ export const deleteRequest = (id) => {
     }
 }
 
-export const createCasting = (newCasting) => {
+export const createCasting = (newCasting, imageUri) => {
     return async dispatch => {
-        // dispatch(handleLoad(true))
-
+        dispatch(handleLoad(true))
         //SAVE FILE
-        const fd = new FormData()
-        fd.append('image', newCasting.image_file)
-        const imageName = await fileApi.saveFile(fd)
-        newCasting.image = imageName
+        const form = new FormData();
+        form.append('image', {
+            uri : imageUri,
+            type : 'image/jpeg',
+            name : 'image.jpg'
+        });
 
-        // const casting = await castingApi.create(newCasting)
-        // dispatch(handleLoad(false))
-        alert(newCasting.image_file)
+        const imageName = await fileApi.saveFile(form)
+        newCasting.image = 'http://food-j.kz/uploads/' + imageName
+        await castingApi.create(newCasting)
+        dispatch(handleLoad(false))
+
         return true
     }
 }
