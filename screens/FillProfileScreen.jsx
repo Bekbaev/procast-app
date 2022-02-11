@@ -6,7 +6,7 @@ import castingTypes from "../common/enums/createCasting_types"
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {Ionicons} from "@expo/vector-icons";
 import {useDispatch} from "react-redux";
-import {createCasting} from "../redux/reducers/asyncReducer"
+import { fillProfile} from "../redux/reducers/asyncReducer"
 import * as ImagePicker from 'expo-image-picker';;
 
 const FillProfileScreen = () => {
@@ -36,12 +36,9 @@ const FillProfileScreen = () => {
     };
 
     const createNewCasting = () => {
-        const newCasting = {
+        const profileInfo = {
             'name': name,
             'city': city,
-            'start_date': `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`,
-            'image': 'https://www.sion-consulting.com/wp-content/themes/consultix/images/no-image-found-360x250.png',
-            'category': category,
             'gender': sex,
             'race': race,
             'eye': eye,
@@ -51,8 +48,7 @@ const FillProfileScreen = () => {
             'height': height,
             'signs': signs,
         }
-
-        dispatch(createCasting(newCasting))
+        dispatch(fillProfile(profileInfo, image))
     }
 
     const pickImage = async () => {
@@ -62,8 +58,6 @@ const FillProfileScreen = () => {
             aspect: [4, 3],
             quality: 1,
         });
-
-        console.log(result);
 
         if (!result.cancelled) {
             setImage(result.uri);
@@ -92,8 +86,9 @@ const FillProfileScreen = () => {
                 >
                     <TextInput
                         style={styles.input}
-                        value={name} onChangeText={text => setName(text)}
-                        placeholder="К прим. Искаков Дастан Толегенович"
+                        // value={name} onChangeText={text => setName(text)}
+                        // placeholder="К прим. Искаков Дастан Толегенович"
+                        value="Оо"
                     />
                     <Text style={styles.castingName} >Заполните ваше ФИО </Text>
                 </LinearGradient>
@@ -257,7 +252,7 @@ const FillProfileScreen = () => {
                         onPress={ createNewCasting }
                         style={styles.buttonWrapper}
                     >
-                        <Text style={styles.buttonText}>Создать</Text>
+                        <Text style={styles.buttonText}>Сохранить</Text>
                     </TouchableOpacity>
                 </View>
             </View>

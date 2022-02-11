@@ -27,7 +27,7 @@ const UserProfileScreen = () => {
                 <Image
                     style={styles.logo}
                     source={{
-                        uri: 'https://simg.nicepng.com/png/small/128-1280406_view-user-icon-png-user-circle-icon-png.png',
+                        uri: 'http://food-j.kz/uploads/I6st1EgaMCimage.jpg',
                     }}
                 />
 
@@ -35,68 +35,68 @@ const UserProfileScreen = () => {
                     <Text style={[styles.mainInfoText, styles.bold]}>{info?.name}</Text>
                 </GradientBlock>
 
-                {/*<View style={[styles.infoBlock, {marginTop: 20}]}>*/}
-                {/*    <View style={styles.infoBlockCategory}><Text style={styles.bold}>Возраст</Text></View>*/}
-                {/*    <GradientBlock>*/}
-                {/*        <Text style={styles.mainInfoText}>21</Text>*/}
-                {/*    </GradientBlock>*/}
-                {/*</View>*/}
-                {/*<View style={styles.infoBlock}>*/}
-                {/*    <View style={styles.infoBlockCategory}><Text style={styles.bold}>Рост</Text></View>*/}
-                {/*    <GradientBlock colors="orange">*/}
-                {/*        <Text style={styles.mainInfoText}>171</Text>*/}
-                {/*    </GradientBlock>*/}
-                {/*</View>*/}
-                {/*<View style={styles.infoBlock}>*/}
-                {/*    <View style={styles.infoBlockCategory}><Text style={styles.bold}>Вес</Text></View>*/}
-                {/*    <GradientBlock>*/}
-                {/*        <Text style={styles.mainInfoText}>58</Text>*/}
-                {/*    </GradientBlock>*/}
-                {/*</View>*/}
+                <View style={[styles.infoBlock, {marginTop: 20}]}>
+                    <View style={styles.infoBlockCategory}><Text style={styles.bold}>Возраст</Text></View>
+                    <GradientBlock>
+                        <Text style={styles.mainInfoText}>1</Text>
+                    </GradientBlock>
+                </View>
+                <View style={styles.infoBlock}>
+                    <View style={styles.infoBlockCategory}><Text style={styles.bold}>Рост</Text></View>
+                    <GradientBlock colors="orange">
+                        <Text style={styles.mainInfoText}>1</Text>
+                    </GradientBlock>
+                </View>
+                <View style={styles.infoBlock}>
+                    <View style={styles.infoBlockCategory}><Text style={styles.bold}>Вес</Text></View>
+                    <GradientBlock>
+                        <Text style={styles.mainInfoText}>1</Text>
+                    </GradientBlock>
+                </View>
 
-                {/*<View style={[styles.infoBlock, {marginTop: 20}]}>*/}
-                {/*    <View style={styles.infoBlockCategory}><Text >Типаж внешности</Text></View>*/}
+                <View style={[styles.infoBlock, {marginTop: 20}]}>
+                    <View style={styles.infoBlockCategory}><Text >Типаж внешности</Text></View>
 
-                {/*    <GradientBlock colors="orange">*/}
-                {/*        <Text style={styles.mainInfoText}>Азиатский</Text>*/}
-                {/*    </GradientBlock>*/}
-                {/*</View>*/}
-                {/*<View style={styles.infoBlock}>*/}
-                {/*    <View style={styles.infoBlockCategory}><Text >Цвет глаз</Text></View>*/}
-                {/*    <GradientBlock>*/}
-                {/*        <Text style={styles.mainInfoText}>Голубые</Text>*/}
-                {/*    </GradientBlock>*/}
-                {/*</View>*/}
-                {/*<View style={styles.infoBlock}>*/}
-                {/*    <View style={styles.infoBlockCategory}><Text >Цвет волос</Text></View>*/}
-                {/*    <GradientBlock colors="orange">*/}
-                {/*        <Text style={styles.mainInfoText}>Шатен</Text>*/}
-                {/*    </GradientBlock>*/}
-                {/*</View>*/}
-                {/*<View style={styles.infoBlock}>*/}
-                {/*    <View style={styles.infoBlockCategory}><Text >Особые приметы или предпочтения</Text></View>*/}
-                {/*    <GradientBlock>*/}
-                {/*        <Text style={styles.mainInfoText}>глаза темные, кожа светлая, много морщин вокруг глаз, на коже раздражение («как после бритья»), «обвисшие щеки». Нос крупный («картошкой»).</Text>*/}
-                {/*    </GradientBlock>*/}
-                {/*</View>*/}
-                {/*<View style={styles.infoBlock}>*/}
-                {/*    <View style={styles.infoBlockCategory}><Text >Знания языков</Text></View>*/}
-                {/*    <GradientBlock colors="orange">*/}
-                {/*        <Text style={styles.mainInfoText} >Казахский, Русский, Английский</Text>*/}
-                {/*    </GradientBlock>*/}
-                {/*</View>*/}
-                {/*<View style={styles.infoBlock}>*/}
-                {/*    <View style={styles.infoBlockCategory}><Text >Город</Text></View>*/}
-                {/*    <GradientBlock>*/}
-                {/*        <Text style={styles.mainInfoText}>Алматы</Text>*/}
-                {/*    </GradientBlock>*/}
-                {/*</View>*/}
-                {/*<View style={styles.infoBlock}>*/}
-                {/*    <View style={styles.infoBlockCategory}><Text >Опыт работы</Text></View>*/}
-                {/*    <GradientBlock colors="orange">*/}
-                {/*        <Text style={styles.mainInfoText}>58</Text>*/}
-                {/*    </GradientBlock>*/}
-                {/*</View>*/}
+                    <GradientBlock colors="orange">
+                        <Text style={styles.mainInfoText}>Азиатский</Text>
+                    </GradientBlock>
+                </View>
+                <View style={styles.infoBlock}>
+                    <View style={styles.infoBlockCategory}><Text >Цвет глаз</Text></View>
+                    <GradientBlock>
+                        <Text style={styles.mainInfoText}>Голубые</Text>
+                    </GradientBlock>
+                </View>
+                <View style={styles.infoBlock}>
+                    <View style={styles.infoBlockCategory}><Text >Цвет волос</Text></View>
+                    <GradientBlock colors="orange">
+                        <Text style={styles.mainInfoText}>Шатен</Text>
+                    </GradientBlock>
+                </View>
+                <View style={styles.infoBlock}>
+                    <View style={styles.infoBlockCategory}><Text >Особые приметы или предпочтения</Text></View>
+                    <GradientBlock>
+                        <Text style={styles.mainInfoText}>1</Text>
+                    </GradientBlock>
+                </View>
+                <View style={styles.infoBlock}>
+                    <View style={styles.infoBlockCategory}><Text >Знания языков</Text></View>
+                    <GradientBlock colors="orange">
+                        <Text style={styles.mainInfoText} >Казахский</Text>
+                    </GradientBlock>
+                </View>
+                <View style={styles.infoBlock}>
+                    <View style={styles.infoBlockCategory}><Text >Город</Text></View>
+                    <GradientBlock>
+                        <Text style={styles.mainInfoText}>Павлодар</Text>
+                    </GradientBlock>
+                </View>
+                <View style={styles.infoBlock}>
+                    <View style={styles.infoBlockCategory}><Text >Опыт работы</Text></View>
+                    <GradientBlock colors="orange">
+                        <Text style={styles.mainInfoText}></Text>
+                    </GradientBlock>
+                </View>
 
 
                 <GradientBlock marginTop="20">

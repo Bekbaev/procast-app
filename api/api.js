@@ -22,6 +22,11 @@ export const authApi = {
         const {data} = await instance.get(`user/${id}`)
         return data
     },
+    async fillProfile(profileInfo) {
+        const {data} = await instance.put(`user`, profileInfo)
+        return data
+    },
+
 }
 
 export const castingApi = {

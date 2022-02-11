@@ -1,4 +1,4 @@
-import {castingApi, fileApi} from "../../api/api";
+import {authApi, castingApi, fileApi} from "../../api/api";
 import {addCastings, addMyCastings, cancelRequest, handleLoad, sendRequest} from "./castingsReducer";
 import {AsyncStorage} from "react-native";
 
@@ -71,6 +71,25 @@ export const createCasting = (newCasting, imageUri) => {
         const imageName = await fileApi.saveFile(form)
         newCasting.image = 'http://food-j.kz/uploads/' + imageName
         await castingApi.create(newCasting)
+        dispatch(handleLoad(false))
+
+        return true
+    }
+}
+export const fillProfile = (profileInfo, imageUri) => {
+    return async dispatch => {
+        dispatch(handleLoad(true))
+        //SAVE FILE
+        const form = new FormData();
+        form.append('image', {
+            uri : imageUri,
+            type : 'image/jpeg',
+            name : 'image.jpg'
+        });
+
+        const imageName = await fileApi.saveFile(form)
+        profileInfo.image = 'http://food-j.kz/uploads/' + imageName
+        await authApi.fillProfile(profileInfo)
         dispatch(handleLoad(false))
 
         return true

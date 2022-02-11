@@ -21,6 +21,13 @@ export default class FilterSwiper extends React.Component {
             activeIndex:0,
             carouselItems: [
                 {
+                    title:"Item 0",
+                    text: "Все",
+                    icon: require('../assets/fi0.png'),
+                    type: "",
+                    setFilterState: this.props.setFilterState
+                },
+                {
                     title:"Item 1",
                     text: "Фильмы",
                     icon: require('../assets/fi1.png'),

@@ -28,15 +28,15 @@ export default function UserResponse(props) {
                     <Image
                         style={styles.image}
                         source={{
-                            uri: 'https://www.sion-consulting.com/wp-content/themes/consultix/images/no-image-found-360x250.png',
+                            uri: 'http://food-j.kz/uploads/I6st1EgaMCimage.jpg',
                         }}
                     />
                 </View>
                 <View style={styles.responseLeftWrapper}>
                     <Text style={styles.responseInfoName}>{props.name}</Text>
                     <View style={styles.responseInfo}>
-                        <Text>Возраст: </Text>
-                        <Text>Рост: </Text>
+                        <Text>Возраст: 1</Text>
+                        <Text>Рост: 1</Text>
                     </View>
                 </View>
             </View>
