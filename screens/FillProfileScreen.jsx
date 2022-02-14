@@ -7,11 +7,15 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import {Ionicons} from "@expo/vector-icons";
 import {useDispatch} from "react-redux";
 import { fillProfile} from "../redux/reducers/asyncReducer"
-import * as ImagePicker from 'expo-image-picker';;
+import * as ImagePicker from 'expo-image-picker';
+import {useNavigation} from "@react-navigation/core";
+
+;
 
 const FillProfileScreen = () => {
     const gradientColors = ['#dc4a5b', '#f5552b', '#f58e3c']
     const dispatch = useDispatch()
+    let navigation = useNavigation()
 
     const [city, setCity] = useState('Pavlodar')
     const [name, setName] = useState('')
@@ -35,7 +39,7 @@ const FillProfileScreen = () => {
         setDate(currentDate);
     };
 
-    const createNewCasting = () => {
+    const createNewCasting = async () => {
         const profileInfo = {
             'name': name,
             'city': city,
@@ -49,6 +53,7 @@ const FillProfileScreen = () => {
             'signs': signs,
         }
         dispatch(fillProfile(profileInfo, image))
+        navigation.navigate('Главная')
     }
 
     const pickImage = async () => {
@@ -88,7 +93,7 @@ const FillProfileScreen = () => {
                         style={styles.input}
                         // value={name} onChangeText={text => setName(text)}
                         // placeholder="К прим. Искаков Дастан Толегенович"
-                        value="Оо"
+                        value=""
                     />
                     <Text style={styles.castingName} >Заполните ваше ФИО </Text>
                 </LinearGradient>

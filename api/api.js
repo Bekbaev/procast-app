@@ -1,5 +1,6 @@
 import instance from "./instance";
 import axios from "axios";
+import {AsyncStorage} from "react-native";
 
 export const authApi = {
     async login(phone, password) {
@@ -26,7 +27,13 @@ export const authApi = {
         const {data} = await instance.put(`user`, profileInfo)
         return data
     },
-
+    async getProfile(id) {
+        if(!id){
+            id = await AsyncStorage.getItem('user_id')
+        }
+        const {data} = await instance.get(`profile/${id}`)
+        return data
+    },
 }
 
 export const castingApi = {

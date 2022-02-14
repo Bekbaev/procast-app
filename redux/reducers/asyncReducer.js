@@ -78,7 +78,7 @@ export const createCasting = (newCasting, imageUri) => {
 }
 export const fillProfile = (profileInfo, imageUri) => {
     return async dispatch => {
-        dispatch(handleLoad(true))
+        // dispatch(handleLoad(true))
         //SAVE FILE
         const form = new FormData();
         form.append('image', {
@@ -86,11 +86,11 @@ export const fillProfile = (profileInfo, imageUri) => {
             type : 'image/jpeg',
             name : 'image.jpg'
         });
-
+        alert('Профиль успешно заполнен')
         const imageName = await fileApi.saveFile(form)
         profileInfo.image = 'http://food-j.kz/uploads/' + imageName
         await authApi.fillProfile(profileInfo)
-        dispatch(handleLoad(false))
+        // dispatch(handleLoad(false))
 
         return true
     }

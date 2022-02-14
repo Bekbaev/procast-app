@@ -13,6 +13,8 @@ const UserProfileScreen = () => {
 
     const getUserInfo = async () => {
         const response = await authApi.getUser(id)
+        const profileInfo = await authApi.getProfile(id)
+        alert(JSON.stringify(profileInfo))
         setInfo(response)
     }
 
