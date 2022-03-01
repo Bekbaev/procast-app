@@ -6,6 +6,7 @@ import {authApi} from "../api/api";
 import Loading from "../components/Loading";
 import { useIsFocused } from "@react-navigation/native";
 import {useFocusEffect} from "@react-navigation/native";
+import ProfileSlider from "../components/ProfileSlider";
 
 const ProfileScreen = ({navigation}) => {
     const [info, setInfo] = useState({})
@@ -16,6 +17,7 @@ const ProfileScreen = ({navigation}) => {
         setIsLoading(true)
         const response = await authApi.getMe()
         const myProfile = await authApi.getProfile()
+        // alert(JSON.stringify(myProfile ))
         setIsLoading(false)
         setProfile(myProfile)
         setInfo(response)
@@ -47,6 +49,7 @@ const ProfileScreen = ({navigation}) => {
                     }}
                 />
 
+                <ProfileSlider />
                 <GradientBlock marginTop="20" >
                     <Text style={[styles.mainInfoText, styles.bold]}>{info?.name}</Text>
                 </GradientBlock>
@@ -62,13 +65,13 @@ const ProfileScreen = ({navigation}) => {
                     </GradientBlock>
                 </View>
                 <View style={styles.infoBlock}>
-                    <View style={styles.infoBlockCategory}><Text style={styles.bold}>Рост</Text></View>
+                    <View style={styles.infoBlockCategory}><Text style={styles.bold}>Вес</Text></View>
                     <GradientBlock colors="orange">
                         <Text style={styles.mainInfoText}>{profile ? profile?.height : 'Не указан'}</Text>
                     </GradientBlock>
                 </View>
                 <View style={styles.infoBlock}>
-                    <View style={styles.infoBlockCategory}><Text style={styles.bold}>Вес</Text></View>
+                    <View style={styles.infoBlockCategory}><Text style={styles.bold}>Рост</Text></View>
                     <GradientBlock>
                         <Text style={styles.mainInfoText}>{profile ? profile?.weight : 'Не указан'}</Text>
                     </GradientBlock>

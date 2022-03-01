@@ -60,13 +60,13 @@ const UserProfileScreen = () => {
                             </GradientBlock>
                         </View>
                         <View style={styles.infoBlock}>
-                            <View style={styles.infoBlockCategory}><Text style={styles.bold}>Рост</Text></View>
+                            <View style={styles.infoBlockCategory}><Text style={styles.bold}>РостВес</Text></View>
                             <GradientBlock colors="orange">
                                 <Text style={styles.mainInfoText}>{profile?.height}</Text>
                             </GradientBlock>
                         </View>
                         <View style={styles.infoBlock}>
-                            <View style={styles.infoBlockCategory}><Text style={styles.bold}>Вес</Text></View>
+                            <View style={styles.infoBlockCategory}><Text style={styles.bold}> </Text></View>
                             <GradientBlock>
                                 <Text style={styles.mainInfoText}>{profile?.weight}</Text>
                             </GradientBlock>

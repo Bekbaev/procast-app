@@ -78,7 +78,6 @@ export const createCasting = (newCasting, imageUri) => {
 }
 export const fillProfile = (profileInfo, imageUri) => {
     return async dispatch => {
-        // dispatch(handleLoad(true))
         //SAVE FILE
         const form = new FormData();
         form.append('image', {
@@ -87,10 +86,40 @@ export const fillProfile = (profileInfo, imageUri) => {
             name : 'image.jpg'
         });
 
+        if(profileInfo.photos[0]){
+            const form = new FormData();
+            form.append('image', {
+                uri : imageUri,
+                type : 'image/jpeg',
+                name : 'image.jpg'
+            });
+            profileInfo.photos[0] = await fileApi.saveFile(form)
+        }
+
+        if(profileInfo.photos[1]){
+            const form = new FormData();
+            form.append('image', {
+                uri : imageUri,
+                type : 'image/jpeg',
+                name : 'image.jpg'
+            });
+            profileInfo.photos[1] = await fileApi.saveFile(form)
+        }
+
+        if(profileInfo.photos[2]){
+            const form = new FormData();
+            form.append('image', {
+                uri : imageUri,
+                type : 'image/jpeg',
+                name : 'image.jpg'
+            });
+            profileInfo.photos[2] = await fileApi.saveFile(form)
+        }
+
         const imageName = await fileApi.saveFile(form)
         profileInfo.image = 'http://food-j.kz/uploads/' + imageName
+        // alert(JSON.stringify(profileInfo  ))
         await authApi.fillProfile(profileInfo)
-        // dispatch(handleLoad(false))
 
         return true
     }

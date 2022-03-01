@@ -32,6 +32,9 @@ const FillProfileScreen = () => {
     const [show, setShow] = useState(false);
     const [signs, setSigns] = useState('');
     const [image, setImage] = useState(null);
+    const [photos, setPhotos] = useState([null, null, null])
+    const [forRender, setForRender] = useState(null)
+    const [exp, setExpt] = useState('')
 
     const [info, setInfo] = useState({})
     const [profile, setProfile] = useState(null)
@@ -68,6 +71,7 @@ const FillProfileScreen = () => {
             'weight': weight,
             'height': height,
             'signs': signs,
+            'photos': photos
         }
         setIsLoading(true)
         await dispatch(fillProfile(profileInfo, image))
@@ -88,6 +92,25 @@ const FillProfileScreen = () => {
             setImage(result.uri);
         }
     };
+
+    const pickProfileImage = async (arrayIndex) => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+        });
+
+        if (!result.cancelled) {
+            setPhotos(prevState => {
+                prevState[arrayIndex] = result.uri
+                return prevState
+            });
+        }
+
+        setForRender(Math.random())
+
+    }
 
     if(isLoading){
         return <Loading />
@@ -136,8 +159,9 @@ const FillProfileScreen = () => {
                             Город
                         </Text>
                         <View style={styles.pickerWrapper}>
-                            <Picker style={styles.picker}>
-                                <Picker.Item label="Павлодар" value="Павлодар"/>
+                            <Picker style={styles.picker} selectedValue={city} onValueChange={itemValue => setCity(itemValue)}>
+                                {castingTypes.city.map((el, i) => <Picker.Item key={el.city} label={el.city}
+                                                                              value={el.city}/>)}
                             </Picker>
                         </View>
                     </View>
@@ -272,6 +296,33 @@ const FillProfileScreen = () => {
                         </View>
                     </View>
                 </GradientBlock>
+                <GradientBlock marginTop="5">
+                    <View style={styles.formWrapper}>
+                        <Text style={styles.formTitle}>
+                            Опыт работы
+                        </Text>
+                        <TextInput
+                            editable
+                            maxLength={40}
+                            style={styles.FormInput}
+                            keyboardType='text'
+                            value={exp} onChangeText={text => setExpt(text)}
+                        />
+                    </View>
+                </GradientBlock>
+
+                {
+                    photos.map((el, index) => (
+                        <>
+                            <View style={styles.addPhotoButton}>
+                                <Text style={styles.addPhotoButtonText} onPress={() => pickProfileImage(index)}>Добавить фото</Text>
+                            </View>
+
+                            {photos[index] && <Image source={{ uri: photos[index] }} style={{ width: '96%', height: 300 }} />}
+                        </>
+                    ))
+                }
+
 
                 <View style={styles.buttons}>
                     <TouchableOpacity

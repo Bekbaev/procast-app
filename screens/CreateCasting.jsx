@@ -121,7 +121,8 @@ const CreateCasting = () => {
                         </Text>
                         <View style={styles.pickerWrapper}>
                             <Picker style={styles.picker}>
-                                <Picker.Item label="Павлодар" value="Pavlodar"/>
+                                {castingTypes.city.map((el, i) => <Picker.Item key={el.city} label={el.city}
+                                                                               value={el.city}/>)}
                             </Picker>
                         </View>
                     </View>
