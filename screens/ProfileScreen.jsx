@@ -3,19 +3,39 @@ import {Image, ScrollView, StyleSheet, Text, TouchableOpacity, View} from "react
 import GradientBlock from "../components/GradientBlock";
 import ProfileCompletedBar from "../components/ProfileCompletedBar";
 import {authApi} from "../api/api";
+import Loading from "../components/Loading";
+import { useIsFocused } from "@react-navigation/native";
+import {useFocusEffect} from "@react-navigation/native";
 
 const ProfileScreen = ({navigation}) => {
     const [info, setInfo] = useState({})
+    const [profile, setProfile] = useState(null)
+    const [isLoading, setIsLoading] = useState(true)
 
     const getMyInfo = async () => {
+        setIsLoading(true)
         const response = await authApi.getMe()
+        const myProfile = await authApi.getProfile()
+        setIsLoading(false)
+        setProfile(myProfile)
         setInfo(response)
     }
 
     useEffect(() => {
         getMyInfo()
-    }, )
+    }, [])
 
+    useFocusEffect(
+        React.useCallback(() => {
+            getMyInfo()
+        }, [])
+    );
+
+
+
+    if(isLoading){
+        return <Loading />
+    }
 
     return (
         <ScrollView>
@@ -23,7 +43,7 @@ const ProfileScreen = ({navigation}) => {
                 <Image
                     style={styles.logo}
                     source={{
-                        uri: 'https://simg.nicepng.com/png/small/128-1280406_view-user-icon-png-user-circle-icon-png.png',
+                        uri: profile ? profile?.image : 'https://simg.nicepng.com/png/small/128-1280406_view-user-icon-png-user-circle-icon-png.png',
                     }}
                 />
 
@@ -38,19 +58,19 @@ const ProfileScreen = ({navigation}) => {
                 <View style={[styles.infoBlock, {marginTop: 20}]}>
                     <View style={styles.infoBlockCategory}><Text style={styles.bold}>Возраст</Text></View>
                     <GradientBlock>
-                        <Text style={styles.mainInfoText}>21</Text>
+                        <Text style={styles.mainInfoText}></Text>
                     </GradientBlock>
                 </View>
                 <View style={styles.infoBlock}>
                     <View style={styles.infoBlockCategory}><Text style={styles.bold}>Рост</Text></View>
                     <GradientBlock colors="orange">
-                        <Text style={styles.mainInfoText}>171</Text>
+                        <Text style={styles.mainInfoText}>{profile ? profile?.height : 'Не указан'}</Text>
                     </GradientBlock>
                 </View>
                 <View style={styles.infoBlock}>
                     <View style={styles.infoBlockCategory}><Text style={styles.bold}>Вес</Text></View>
                     <GradientBlock>
-                        <Text style={styles.mainInfoText}>58</Text>
+                        <Text style={styles.mainInfoText}>{profile ? profile?.weight : 'Не указан'}</Text>
                     </GradientBlock>
                 </View>
 
@@ -58,43 +78,43 @@ const ProfileScreen = ({navigation}) => {
                     <View style={styles.infoBlockCategory}><Text >Типаж внешности</Text></View>
 
                     <GradientBlock colors="orange">
-                        <Text style={styles.mainInfoText}>Азиатский</Text>
+                        <Text style={styles.mainInfoText}>{profile ? profile?.race : 'Не указан'}</Text>
                     </GradientBlock>
                 </View>
                 <View style={styles.infoBlock}>
                     <View style={styles.infoBlockCategory}><Text >Цвет глаз</Text></View>
                     <GradientBlock>
-                        <Text style={styles.mainInfoText}>Голубые</Text>
+                        <Text style={styles.mainInfoText}>{profile ? profile?.weight : 'Не указан'}</Text>
                     </GradientBlock>
                 </View>
                 <View style={styles.infoBlock}>
                     <View style={styles.infoBlockCategory}><Text >Цвет волос</Text></View>
                     <GradientBlock colors="orange">
-                        <Text style={styles.mainInfoText}>Шатен</Text>
+                        <Text style={styles.mainInfoText}>{profile ? profile?.hair : 'Не указан'}</Text>
                     </GradientBlock>
                 </View>
                 <View style={styles.infoBlock}>
                     <View style={styles.infoBlockCategory}><Text >Особые приметы или предпочтения</Text></View>
                     <GradientBlock>
-                        <Text style={styles.mainInfoText}>глаза темные, кожа светлая, много морщин вокруг глаз, на коже раздражение («как после бритья»), «обвисшие щеки». Нос крупный («картошкой»).</Text>
+                        <Text style={styles.mainInfoText}>{profile ? profile?.signs : 'Не указан'}</Text>
                     </GradientBlock>
                 </View>
                 <View style={styles.infoBlock}>
                     <View style={styles.infoBlockCategory}><Text >Знания языков</Text></View>
                     <GradientBlock colors="orange">
-                        <Text style={styles.mainInfoText} >Казахский, Русский, Английский</Text>
+                        <Text style={styles.mainInfoText} >{profile ? profile?.language : 'Не указан'}</Text>
                     </GradientBlock>
                 </View>
                 <View style={styles.infoBlock}>
                     <View style={styles.infoBlockCategory}><Text >Город</Text></View>
                     <GradientBlock>
-                        <Text style={styles.mainInfoText}>Алматы</Text>
+                        <Text style={styles.mainInfoText}>{profile ? profile?.city : 'Не указан'}</Text>
                     </GradientBlock>
                 </View>
                 <View style={styles.infoBlock}>
                     <View style={styles.infoBlockCategory}><Text >Опыт работы</Text></View>
                     <GradientBlock colors="orange">
-                        <Text style={styles.mainInfoText}>58</Text>
+                        <Text style={styles.mainInfoText}>{profile ? profile?.exp : 'Не указан'}</Text>
                     </GradientBlock>
                 </View>
 

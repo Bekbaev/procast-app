@@ -7,6 +7,7 @@ import {fetchCastings} from "../redux/reducers/asyncReducer";
 import {searchCasting} from "../redux/reducers/castingsReducer";
 import FilterSwiper from "../components/FilterSwiper";
 import FilterButtons from "../components/FilterButtons";
+import Loading from "../components/Loading";
 
 
 export default function HomeScreen({navigation}) {
@@ -16,6 +17,7 @@ export default function HomeScreen({navigation}) {
     const [filterState, setFilterState] = useState('')
     let castingsArray = useSelector(state => state.castingsReducer.castings);
     const [filteredCastingsArray, setFilteredCastingsArray] = useState(castingsArray)
+    const [isLoading, setIsLoading] = useState(true)
 
     const search = (text) => {
         if(text){
@@ -33,11 +35,20 @@ export default function HomeScreen({navigation}) {
         }
 
         setFilteredCastingsArray(castingsArray.filter(casting => casting.category.includes(filterState)))
+
     }, [filterState, castingsArray])
 
-    if(castingsArray.length == 0) {
-        return <><Text>Тут будет загрузка</Text></>
+    useEffect(() => {
+        setTimeout(()=>{
+            setIsLoading(false)
+        }, 2000)
+    }, [])
+
+    if(isLoading){
+        return <Loading />
     }
+
+
 
     return (
         <ScrollView>

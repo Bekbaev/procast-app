@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {TouchableOpacity, StyleSheet, Text, View, Image} from "react-native";
-import {castingApi} from "../api/api";
+import {authApi, castingApi} from "../api/api";
 
 
 export default function UserResponse(props) {
+    const [profile, setProfile] = useState({})
 
     const toProfile = () => {
         props.navigation.navigate('UserProfileScreen', {
@@ -16,10 +17,19 @@ export default function UserResponse(props) {
         props.getUsers()
     }
 
+    const getUserInfo = async () => {
+        const profileInfo = await authApi.getProfile(props._id)
+        setProfile(profileInfo)
+    }
+
     const decline = async () => {
         await castingApi.updateRequest(props.casting_id, props._id, 2)
         props.getUsers()
     }
+
+    useEffect(() => {
+        getUserInfo()
+    }, [])
 
     return (
         <View style={styles.responseWrapper}>
@@ -28,15 +38,15 @@ export default function UserResponse(props) {
                     <Image
                         style={styles.image}
                         source={{
-                            uri: 'http://food-j.kz/uploads/I6st1EgaMCimage.jpg',
+                            uri: profile?.image,
                         }}
                     />
                 </View>
                 <View style={styles.responseLeftWrapper}>
                     <Text style={styles.responseInfoName}>{props.name}</Text>
                     <View style={styles.responseInfo}>
-                        <Text>Возраст: 1</Text>
-                        <Text>Рост: 1</Text>
+                        <Text>Возраст: </Text>
+                        <Text>Рост: {profile?.height}</Text>
                     </View>
                 </View>
             </View>

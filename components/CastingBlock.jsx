@@ -83,7 +83,7 @@ export default function CastingBlock({casting, dispatch, navigation, myCasting =
                             Категория проекта
                         </Text>
                         <Text style={styles.castingInfoTitle}>
-                            Фильм
+                            {casting.category}
                         </Text>
                         <Text style={styles.castingInfoSubtitle}>
                             Оплата
@@ -228,8 +228,9 @@ const styles = StyleSheet.create({
     castingHeaderTitle: {
         color: '#ffffff',
         fontWeight: 'bold',
-        fontSize: 18,
-        marginTop: -3
+        marginTop: -3,
+        textAlign: 'center',
+
     }
 })
 

@@ -8,6 +8,9 @@
     "android": {
       "package": "com.procast.procast"
     },
+	"splash": {
+		"image": "./assets/start.png"
+	},
     "slug": "procast-app",
     "version": "1.0.0",
     "assetBundlePatterns": [

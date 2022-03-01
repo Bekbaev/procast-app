@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {ScrollView, StyleSheet, Text, TextInput, View, Picker, TouchableOpacity, Button, Image} from "react-native";
 import {LinearGradient} from "expo-linear-gradient";
 import GradientBlock from "../components/GradientBlock";
@@ -9,6 +9,8 @@ import {useDispatch} from "react-redux";
 import { fillProfile} from "../redux/reducers/asyncReducer"
 import * as ImagePicker from 'expo-image-picker';
 import {useNavigation} from "@react-navigation/core";
+import Loading from "../components/Loading";
+import {authApi} from "../api/api";
 
 ;
 
@@ -17,21 +19,24 @@ const FillProfileScreen = () => {
     const dispatch = useDispatch()
     let navigation = useNavigation()
 
-    const [city, setCity] = useState('Pavlodar')
-    const [name, setName] = useState('')
-    const [sex, setSex] = useState('male')
-    const [race, setRace] = useState('asian')
-    const [eye, setEye] = useState('brown')
-    const [hair, setHair] = useState('blond')
+    const [city, setCity] = useState('Павлодар')
+    const [sex, setSex] = useState('Мужской')
+    const [race, setRace] = useState('Азиатский')
+    const [eye, setEye] = useState('Карий')
+    const [hair, setHair] = useState('Блонд')
     const [height, setHeight] = useState('')
     const [weight, setWeight] = useState('')
-    const [language, setLanguage] = useState('english')
+    const [language, setLanguage] = useState('Английский')
     const [date, setDate] = useState(new Date(1598051730000));
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
     const [signs, setSigns] = useState('');
     const [image, setImage] = useState(null);
 
+    const [info, setInfo] = useState({})
+    const [profile, setProfile] = useState(null)
+
+    const [isLoading, setIsLoading] = useState(true)
 
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;
@@ -39,9 +44,21 @@ const FillProfileScreen = () => {
         setDate(currentDate);
     };
 
+    const getMyInfo = async () => {
+        const response = await authApi.getMe()
+        const myProfile = await authApi.getProfile()
+        setProfile(myProfile)
+        setInfo(response)
+        setIsLoading(false)
+    }
+
+    useEffect(() => {
+        getMyInfo()
+    }, [])
+
     const createNewCasting = async () => {
         const profileInfo = {
-            'name': name,
+            'name': '',
             'city': city,
             'gender': sex,
             'race': race,
@@ -52,7 +69,10 @@ const FillProfileScreen = () => {
             'height': height,
             'signs': signs,
         }
-        dispatch(fillProfile(profileInfo, image))
+        setIsLoading(true)
+        await dispatch(fillProfile(profileInfo, image))
+        setIsLoading(false)
+        alert('Профиль успешно заполнен')
         navigation.navigate('Главная')
     }
 
@@ -68,6 +88,10 @@ const FillProfileScreen = () => {
             setImage(result.uri);
         }
     };
+
+    if(isLoading){
+        return <Loading />
+    }
 
     return (
         <ScrollView>
@@ -91,11 +115,8 @@ const FillProfileScreen = () => {
                 >
                     <TextInput
                         style={styles.input}
-                        // value={name} onChangeText={text => setName(text)}
-                        // placeholder="К прим. Искаков Дастан Толегенович"
-                        value=""
+                        value={info?.name}
                     />
-                    <Text style={styles.castingName} >Заполните ваше ФИО </Text>
                 </LinearGradient>
                 <GradientBlock marginTop="5" colors='orange'>
                     <View style={styles.formWrapper}>
@@ -116,7 +137,7 @@ const FillProfileScreen = () => {
                         </Text>
                         <View style={styles.pickerWrapper}>
                             <Picker style={styles.picker}>
-                                <Picker.Item label="Павлодар" value="Pavlodar"/>
+                                <Picker.Item label="Павлодар" value="Павлодар"/>
                             </Picker>
                         </View>
                     </View>
@@ -317,9 +338,8 @@ const styles = StyleSheet.create({
     },
     castingNameWrapper: {
         width: '100%',
-        height: 105,
+        height: 80,
         borderRadius: 15,
-        padding: 10,
         justifyContent: 'center',
         alignItems: 'center',
     },

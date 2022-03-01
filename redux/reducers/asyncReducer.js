@@ -86,7 +86,7 @@ export const fillProfile = (profileInfo, imageUri) => {
             type : 'image/jpeg',
             name : 'image.jpg'
         });
-        alert('Профиль успешно заполнен')
+
         const imageName = await fileApi.saveFile(form)
         profileInfo.image = 'http://food-j.kz/uploads/' + imageName
         await authApi.fillProfile(profileInfo)

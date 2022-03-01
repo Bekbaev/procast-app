@@ -25,6 +25,7 @@ const SplashScreen = (props) => {
     return (
         <NavigationContainer>
             <Drawer.Navigator
+                backBehavior="history"
                 screenOptions={{
                     headerStyle: {
                         backgroundColor: '#f4511e',
