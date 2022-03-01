@@ -24,8 +24,13 @@ export const authApi = {
         return data
     },
     async fillProfile(profileInfo) {
-        const {data} = await instance.put(`user`, profileInfo)
-        return data
+        try {
+            const {data} = await instance.put(`user`, profileInfo)
+            return data
+        }catch (e) {
+            alert(JSON.stringify(e))
+        }
+
     },
     async getProfile(id) {
         if(!id){
@@ -55,6 +60,10 @@ export const castingApi = {
     },
     async getRequested(id) {
         const {data} = await instance.get(`getRequested/${id}`)
+        return data
+    },
+    async getRequestedCompleted(id) {
+        const {data} = await instance.get(`getRequestedCompleted/${id}`)
         return data
     },
     async create(obj) {

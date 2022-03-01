@@ -7,15 +7,20 @@ import {castingApi} from "../api/api";
 
 export default function UserResponsesScreen({navigation}) {
     const [users, setUsers] = useState([])
+    const [usersCompleted, setUsersCompleted] = useState([])
     const route = useRoute();
     const {id, name} = route.params;
 
     const getUsers = async () => {
         try {
             const response = await castingApi.getRequested(id)
+            const competed = await castingApi.getRequestedCompleted(id)
+            console.log(competed)
             setUsers(response)
+            setUsersCompleted(competed)
         } catch (e) {
             setUsers([])
+            // alert( JSON.stringify(e) )
         }
     }
 
@@ -35,7 +40,11 @@ export default function UserResponsesScreen({navigation}) {
             <View style={styles.container}>
                 <Text style={styles.castingName}>Отклики на кастинг: {name}</Text>
                 {
-                    users.map(u => <UserResponse navigation={navigation} key={u._id} {...u} casting_id={id} getUsers={getUsers}/>)
+                    users && users.map(u => <UserResponse navigation={navigation} key={u._id} {...u} casting_id={id} getUsers={getUsers}/>)
+                }
+
+                {
+                    usersCompleted && usersCompleted.map(u => <UserResponse text={'принят'} navigation={navigation} completed key={u._id} {...u} casting_id={id} getUsers={getUsers}/>)
                 }
             </View>
         </ScrollView>

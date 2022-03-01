@@ -89,7 +89,7 @@ export const fillProfile = (profileInfo, imageUri) => {
         if(profileInfo.photos[0]){
             const form = new FormData();
             form.append('image', {
-                uri : imageUri,
+                uri : profileInfo.photos[0],
                 type : 'image/jpeg',
                 name : 'image.jpg'
             });
@@ -99,7 +99,7 @@ export const fillProfile = (profileInfo, imageUri) => {
         if(profileInfo.photos[1]){
             const form = new FormData();
             form.append('image', {
-                uri : imageUri,
+                uri : profileInfo.photos[1],
                 type : 'image/jpeg',
                 name : 'image.jpg'
             });
@@ -109,7 +109,7 @@ export const fillProfile = (profileInfo, imageUri) => {
         if(profileInfo.photos[2]){
             const form = new FormData();
             form.append('image', {
-                uri : imageUri,
+                uri : profileInfo.photos[2],
                 type : 'image/jpeg',
                 name : 'image.jpg'
             });
@@ -118,9 +118,9 @@ export const fillProfile = (profileInfo, imageUri) => {
 
         const imageName = await fileApi.saveFile(form)
         profileInfo.image = 'http://food-j.kz/uploads/' + imageName
-        // alert(JSON.stringify(profileInfo  ))
+        // alert(JSON.stringify(profileInfo))
         await authApi.fillProfile(profileInfo)
 
-        return true
+        // return true
     }
 }

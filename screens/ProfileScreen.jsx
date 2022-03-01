@@ -7,6 +7,7 @@ import Loading from "../components/Loading";
 import { useIsFocused } from "@react-navigation/native";
 import {useFocusEffect} from "@react-navigation/native";
 import ProfileSlider from "../components/ProfileSlider";
+import {fromDateToAge} from "../common/fromDateToAge";
 
 const ProfileScreen = ({navigation}) => {
     const [info, setInfo] = useState({})
@@ -48,12 +49,14 @@ const ProfileScreen = ({navigation}) => {
                         uri: profile ? profile?.image : 'https://simg.nicepng.com/png/small/128-1280406_view-user-icon-png-user-circle-icon-png.png',
                     }}
                 />
+                {
+                    profile?.photos && <ProfileSlider photos={profile?.photos} />
+                }
 
-                <ProfileSlider />
                 <GradientBlock marginTop="20" >
                     <Text style={[styles.mainInfoText, styles.bold]}>{info?.name}</Text>
                 </GradientBlock>
-                <ProfileCompletedBar percent={100} />
+                <ProfileCompletedBar percent={profile ? 100 : 0} />
                 <TouchableOpacity style={styles.buttonWrapper}>
                     <Text onPress={() => navigation.navigate('FillProfileScreen')} style={styles.buttonText}>Заполнить профиль</Text>
                 </TouchableOpacity>
@@ -61,7 +64,7 @@ const ProfileScreen = ({navigation}) => {
                 <View style={[styles.infoBlock, {marginTop: 20}]}>
                     <View style={styles.infoBlockCategory}><Text style={styles.bold}>Возраст</Text></View>
                     <GradientBlock>
-                        <Text style={styles.mainInfoText}></Text>
+                        <Text style={styles.mainInfoText}>{profile ? fromDateToAge(profile.date) : 'Не указан'}</Text>
                     </GradientBlock>
                 </View>
                 <View style={styles.infoBlock}>

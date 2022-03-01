@@ -71,13 +71,16 @@ const FillProfileScreen = () => {
             'weight': weight,
             'height': height,
             'signs': signs,
-            'photos': photos
+            'photos': photos,
+            'date': JSON.stringify(date),
+            'exp': exp
         }
         setIsLoading(true)
         await dispatch(fillProfile(profileInfo, image))
         setIsLoading(false)
         alert('Профиль успешно заполнен')
         navigation.navigate('Главная')
+        // alert(JSON.stringify(profileInfo))
     }
 
     const pickImage = async () => {
@@ -85,7 +88,7 @@ const FillProfileScreen = () => {
             mediaTypes: ImagePicker.MediaTypeOptions.Images,
             allowsEditing: true,
             aspect: [4, 3],
-            quality: 1,
+            quality: .5,
         });
 
         if (!result.cancelled) {
@@ -98,7 +101,7 @@ const FillProfileScreen = () => {
             mediaTypes: ImagePicker.MediaTypeOptions.Images,
             allowsEditing: true,
             aspect: [4, 3],
-            quality: 1,
+            quality: .5,
         });
 
         if (!result.cancelled) {
@@ -185,7 +188,7 @@ const FillProfileScreen = () => {
                 </GradientBlock>
 
                 <View style={styles.addPhotoButton}  >
-                    <Text style={styles.addPhotoButtonText} onPress={pickImage}>Добавить фото</Text>
+                    <Text style={styles.addPhotoButtonText} onPress={pickImage}>Добавить фото профиля</Text>
                 </View>
 
                 {image && <Image source={{ uri: image }} style={{ width: '96%', height: 300 }} />}

@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {TouchableOpacity, StyleSheet, Text, View, Image} from "react-native";
 import {authApi, castingApi} from "../api/api";
+import {fromDateToAge} from "../common/fromDateToAge";
 
 
 export default function UserResponse(props) {
@@ -45,8 +46,12 @@ export default function UserResponse(props) {
                 <View style={styles.responseLeftWrapper}>
                     <Text style={styles.responseInfoName}>{props.name}</Text>
                     <View style={styles.responseInfo}>
-                        <Text>Возраст: </Text>
-                        <Text>Рост: {profile?.height}</Text>
+                        <Text>Возраст: {fromDateToAge(profile?.date)}</Text>
+                        <Text>Рост: {profile?.weight}</Text>
+                        {
+                            props.completed &&
+                            <Text>Статус: {props.text}</Text>
+                        }
                     </View>
                 </View>
             </View>
@@ -55,12 +60,18 @@ export default function UserResponse(props) {
                 <TouchableOpacity style={styles.responseButton}>
                     <Text onPress={toProfile} style={styles.responseButtonText}>Анкета</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.responseButton}>
-                    <Text onPress={accept} style={styles.responseButtonText}>Пригласить</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.responseButton}>
-                    <Text onPress={decline} style={styles.responseButtonText}>Отклонить</Text>
-                </TouchableOpacity>
+                {
+                    !props.completed &&
+                        <>
+                        <TouchableOpacity style={styles.responseButton}>
+                            <Text onPress={accept} style={styles.responseButtonText}>Пригласить</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.responseButton}>
+                            <Text onPress={decline} style={styles.responseButtonText}>Отклонить</Text>
+                        </TouchableOpacity>
+                        </>
+                }
+
             </View>
         </View>
     );

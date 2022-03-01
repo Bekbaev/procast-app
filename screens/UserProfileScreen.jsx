@@ -5,6 +5,8 @@ import ProfileCompletedBar from "../components/ProfileCompletedBar";
 import {authApi} from "../api/api";
 import {useFocusEffect, useRoute} from "@react-navigation/native";
 import Loading from "../components/Loading";
+import ProfileSlider from "../components/ProfileSlider";
+import {fromDateToAge} from "../common/fromDateToAge";
 
 const UserProfileScreen = () => {
     const [info, setInfo] = useState({})
@@ -53,20 +55,23 @@ const UserProfileScreen = () => {
                 {
                     profile &&
                         <>
+                        {
+                            profile.photos && <ProfileSlider photos={profile?.photos} />
+                        }
                         <View style={[styles.infoBlock, {marginTop: 20}]}>
                             <View style={styles.infoBlockCategory}><Text style={styles.bold}>Возраст</Text></View>
                             <GradientBlock>
-                                <Text style={styles.mainInfoText}>1</Text>
+                                <Text style={styles.mainInfoText}>{fromDateToAge(profile?.date)}</Text>
                             </GradientBlock>
                         </View>
                         <View style={styles.infoBlock}>
-                            <View style={styles.infoBlockCategory}><Text style={styles.bold}>РостВес</Text></View>
+                            <View style={styles.infoBlockCategory}><Text style={styles.bold}>Вес</Text></View>
                             <GradientBlock colors="orange">
                                 <Text style={styles.mainInfoText}>{profile?.height}</Text>
                             </GradientBlock>
                         </View>
                         <View style={styles.infoBlock}>
-                            <View style={styles.infoBlockCategory}><Text style={styles.bold}> </Text></View>
+                            <View style={styles.infoBlockCategory}><Text style={styles.bold}>Рост </Text></View>
                             <GradientBlock>
                                 <Text style={styles.mainInfoText}>{profile?.weight}</Text>
                             </GradientBlock>

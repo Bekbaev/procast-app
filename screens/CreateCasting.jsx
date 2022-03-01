@@ -153,8 +153,8 @@ const CreateCasting = () => {
                                     selectedValue={sex}
                                     onValueChange={itemValue => setSex(itemValue)}
                             >
-                                <Picker.Item label="Мужчина" value="male"/>
-                                <Picker.Item label="Женщина" value="famale"/>
+                                <Picker.Item label="Мужчина" value="Мужчина"/>
+                                <Picker.Item label="Женщина" value="Женщина"/>
                             </Picker>
                         </View>
                     </View>
