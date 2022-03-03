@@ -21,8 +21,7 @@ export default function MyCastings({navigation}) {
     return (
         <ScrollView>
             <View style={styles.container}>
-
-                { castingsArray.map(c => <CastingBlock casting_id={c._id} myCasting navigation={navigation} key={c._id} casting={c} dispatch={dispatch}/>) }
+                { castingsArray.map(c => <CastingBlock casting_id={c._id} myCasting navigation={navigation} key={c._id} change casting={c} dispatch={dispatch}/>) }
             </View >
         </ScrollView>
     );

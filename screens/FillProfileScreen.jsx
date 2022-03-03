@@ -53,6 +53,18 @@ const FillProfileScreen = () => {
         setProfile(myProfile)
         setInfo(response)
         setIsLoading(false)
+        console.log(myProfile)
+        setCity(myProfile?.city)
+        setExpt(myProfile?.exp)
+        setEye(myProfile?.eye)
+        setSex(myProfile?.gender)
+        setHair(myProfile?.hair)
+        setHeight(myProfile?.height)
+        setImage(myProfile?.image)
+        setLanguage(myProfile?.language)
+        setRace(myProfile?.race)
+        setSigns(myProfile?.signsy)
+        setWeight(myProfile?.weight)
     }
 
     useEffect(() => {

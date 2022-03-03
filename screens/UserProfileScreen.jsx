@@ -16,8 +16,10 @@ const UserProfileScreen = () => {
     const id = route.params?.id;
 
     const getUserInfo = async () => {
+        setIsLoading(true)
         const response = await authApi.getUser(id)
         const profileInfo = await authApi.getProfile(id)
+        console.log(response)
         setInfo(response)
         setProfile(profileInfo)
         setIsLoading(false)
@@ -27,11 +29,14 @@ const UserProfileScreen = () => {
        getUserInfo()
     }, [id])
 
-    useFocusEffect(
-        React.useCallback(() => {
-            getUserInfo()
-        }, [])
-    );
+
+    // useFocusEffect(
+    //     React.useCallback(() => {
+    //         setProfile(false)
+    //         setInfo({})
+    //         getUserInfo()
+    //     }, [])
+    // );
 
     if(isLoading){
         return <Loading />
@@ -55,9 +60,7 @@ const UserProfileScreen = () => {
                 {
                     profile &&
                         <>
-                        {
-                            profile.photos && <ProfileSlider photos={profile?.photos} />
-                        }
+
                         <View style={[styles.infoBlock, {marginTop: 20}]}>
                             <View style={styles.infoBlockCategory}><Text style={styles.bold}>Возраст</Text></View>
                             <GradientBlock>
@@ -114,12 +117,15 @@ const UserProfileScreen = () => {
                                 <Text style={styles.mainInfoText}>{profile?.city}</Text>
                             </GradientBlock>
                         </View>
-                        {/*<View style={styles.infoBlock}>*/}
-                        {/*    <View style={styles.infoBlockCategory}><Text >Опыт работы</Text></View>*/}
-                        {/*    <GradientBlock colors="orange">*/}
-                        {/*        <Text style={styles.mainInfoText}></Text>*/}
-                        {/*    </GradientBlock>*/}
-                        {/*</View>*/}
+                        <View style={styles.infoBlock}>
+                            <View style={styles.infoBlockCategory}><Text >Опыт работы</Text></View>
+                            <GradientBlock colors="orange">
+                                <Text style={styles.mainInfoText}>{profile?.exp}</Text>
+                            </GradientBlock>
+                        </View>
+                            {
+                                profile.photos && <ProfileSlider photos={profile?.photos} />
+                            }
                     </>
                 }
                 <GradientBlock marginTop="20">

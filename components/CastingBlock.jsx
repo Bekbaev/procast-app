@@ -10,7 +10,7 @@ import { useSelector} from "react-redux";
 import {createRequest, deleteRequest} from "../redux/reducers/asyncReducer";
 
 
-export default function CastingBlock({casting, dispatch, navigation, myCasting = false}) {
+export default function CastingBlock({casting, dispatch, navigation, myCasting = false, change = false}) {
     const gradientColors = ['#dc4a5b', '#f5552b', '#f58e3c']
     const gradientColorsAdded = ['#e1a64f', '#ffaf2c', '#fff82a']
     const castingId = casting._id
@@ -27,6 +27,13 @@ export default function CastingBlock({casting, dispatch, navigation, myCasting =
         navigation.navigate('UserResponsesScreen', {
             id: castingId,
             name: casting.name,
+        })
+    }
+
+    const toChange = () => {
+        navigation.navigate('CastingChange', {
+            id: castingId,
+            casting_name: casting.name,
         })
     }
 
@@ -141,6 +148,18 @@ export default function CastingBlock({casting, dispatch, navigation, myCasting =
                     </View>
                 </TouchableOpacity>
             }
+            {change &&
+                <TouchableOpacity
+                    style={styles.sendRequestButtonWrapper}
+                    onPress={ toChange }
+                >
+                    <View
+                        style={styles.toChangeButton}
+                    >
+                        <Text style={styles.sendRequestText}>Изменить</Text>
+                    </View>
+                </TouchableOpacity>
+            }
 
         </View>
     );
@@ -168,6 +187,15 @@ const styles = StyleSheet.create({
         height: 40,
         marginTop: 10,
         backgroundColor: 'rgba(24,140,0,0.6)'
+    },
+    toChangeButton: {
+        width: '100%',
+        borderRadius: 15,
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: 40,
+        marginTop: 10,
+        backgroundColor: 'rgba(196,196,0,0.6)'
     },
     photo: {
         width: '100%',

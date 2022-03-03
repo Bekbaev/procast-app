@@ -49,9 +49,7 @@ const ProfileScreen = ({navigation}) => {
                         uri: profile ? profile?.image : 'https://simg.nicepng.com/png/small/128-1280406_view-user-icon-png-user-circle-icon-png.png',
                     }}
                 />
-                {
-                    profile?.photos && <ProfileSlider photos={profile?.photos} />
-                }
+
 
                 <GradientBlock marginTop="20" >
                     <Text style={[styles.mainInfoText, styles.bold]}>{info?.name}</Text>
@@ -90,7 +88,7 @@ const ProfileScreen = ({navigation}) => {
                 <View style={styles.infoBlock}>
                     <View style={styles.infoBlockCategory}><Text >Цвет глаз</Text></View>
                     <GradientBlock>
-                        <Text style={styles.mainInfoText}>{profile ? profile?.weight : 'Не указан'}</Text>
+                        <Text style={styles.mainInfoText}>{profile ? profile?.eye : 'Не указан'}</Text>
                     </GradientBlock>
                 </View>
                 <View style={styles.infoBlock}>
@@ -123,6 +121,10 @@ const ProfileScreen = ({navigation}) => {
                         <Text style={styles.mainInfoText}>{profile ? profile?.exp : 'Не указан'}</Text>
                     </GradientBlock>
                 </View>
+
+                {
+                    profile?.photos && <ProfileSlider photos={profile?.photos} />
+                }
 
 
                 <GradientBlock marginTop="20">

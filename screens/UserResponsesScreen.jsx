@@ -15,7 +15,6 @@ export default function UserResponsesScreen({navigation}) {
         try {
             const response = await castingApi.getRequested(id)
             const competed = await castingApi.getRequestedCompleted(id)
-            console.log(competed)
             setUsers(response)
             setUsersCompleted(competed)
         } catch (e) {
@@ -43,9 +42,9 @@ export default function UserResponsesScreen({navigation}) {
                     users && users.map(u => <UserResponse navigation={navigation} key={u._id} {...u} casting_id={id} getUsers={getUsers}/>)
                 }
 
-                {
-                    usersCompleted && usersCompleted.map(u => <UserResponse text={'принят'} navigation={navigation} completed key={u._id} {...u} casting_id={id} getUsers={getUsers}/>)
-                }
+                {/*{*/}
+                {/*    usersCompleted && usersCompleted.map((u, i) => <UserResponse text={'принят'} navigation={navigation} completed key={i} {...u} casting_id={id} getUsers={getUsers}/>)*/}
+                {/*}*/}
             </View>
         </ScrollView>
     );

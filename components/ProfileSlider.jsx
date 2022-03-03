@@ -5,7 +5,7 @@ import {
     SafeAreaView, Image
 } from 'react-native';
 
-import Carousel from 'react-native-snap-carousel';
+import Carousel, {Pagination} from 'react-native-snap-carousel';
 import {useState} from "react";
 
 
@@ -18,11 +18,13 @@ const ProfileSlider = ({photos}) => {
         carouselItems: photos
     })
 
+    const [index, setIndex] = useState(0)
+
     return (
         <>
             <Text style={{ marginBottom: 20, fontWeight: 'bold',  width: '100%', marginTop: 20}}>Фотографии пользователя: </Text>
-            <SafeAreaView style={{flex: 1, backgroundColor:'#f4511e' }}>
-                <View style={{ flex: 1, flexDirection:'row', justifyContent: 'center', }}>
+            <SafeAreaView style={{flex: 1, }}>
+                <View >
                     <Carousel
                         layout={"default"}
                         // ref={ref => this.carousel = ref}
@@ -30,7 +32,26 @@ const ProfileSlider = ({photos}) => {
                         sliderWidth={300}
                         itemWidth={300}
                         renderItem={renderItem}
-                        // onSnapToItem = { index => this.setState({activeIndex:index}) }
+                        onSnapToItem = { index => setIndex(index) }
+                    />
+                    <Pagination
+                        dotsLength={3}
+                        activeDotIndex={index}
+                        // carouselRef={isCarousel}
+                        dotStyle={{
+                            width: 10,
+                            height: 10,
+                            borderRadius: 5,
+                            marginHorizontal: 8,
+                            backgroundColor: '#F4BB41',
+                        }}
+                        tappableDots={true}
+                        inactiveDotStyle={{
+                            backgroundColor: 'black',
+                            // Define styles for inactive dots here
+                        }}
+                        inactiveDotOpacity={0.4}
+                        inactiveDotScale={0.6}
                     />
                 </View>
             </SafeAreaView>

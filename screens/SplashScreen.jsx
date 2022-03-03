@@ -15,6 +15,7 @@ import UserResponsesScreen from "./UserResponsesScreen";
 import UserProfileScreen from "./UserProfileScreen";
 import FillProfileScreen from "./FillProfileScreen";
 import FiltersScreen from "./FiltersScreen";
+import CastingChange from "./CastingChange";
 
 const Drawer = createDrawerNavigator();
 
@@ -46,6 +47,10 @@ const SplashScreen = (props) => {
                 {role === '0' && <Drawer.Screen name="Сохраненые кастинги" component={SavedCastingsScreen}/>}
                 <Drawer.Screen name="Настройки" component={SettingsScreen}/>
                 {role === '1' && <Drawer.Screen name="Создать кастинг" component={CreateCasting}/>}
+                {role === '1' && <Drawer.Screen name="CastingChange" component={CastingChange} options={{
+                    title: 'Изменить кастинг',
+                    drawerItemStyle: {height: 0}
+                }} />}
                 <Drawer.Screen name="Выйти">
                     {() => <ExitScreen singOut={props.singOut}/>}
                 </Drawer.Screen>

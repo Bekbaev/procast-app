@@ -120,7 +120,7 @@ const CreateCasting = () => {
                             Город
                         </Text>
                         <View style={styles.pickerWrapper}>
-                            <Picker style={styles.picker}>
+                            <Picker style={styles.picker} selectedValue={city} onValueChange={itemValue => setCity(itemValue)}>
                                 {castingTypes.city.map((el, i) => <Picker.Item key={el.city} label={el.city}
                                                                                value={el.city}/>)}
                             </Picker>
