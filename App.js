@@ -9,12 +9,38 @@ import instance from "./api/instance";
 import {useDispatch, useSelector} from "react-redux";
 import {handleLoad} from "./redux/reducers/castingsReducer";
 import {setRole} from "./redux/reducers/userReducer";
+import * as Notifications from 'expo-notifications';
+import * as Permissions from 'expo-permissions';
+
+Notifications.setNotificationHandler({
+    handleNotification: async () => ({
+        shouldShowAlert: true,
+        shouldPlaySound: false,
+        shouldSetBadge: false,
+    }),
+});
+
+
 
 export default function App() {
     const [showAuthScreen, setShowAuthScreen] = useState(false)
     const [errorText, setErrorText] = useState({auth: '', register: ''})
     const isLoading = useSelector(state => state?.castingsReducer.isLoading);
     const dispatch = useDispatch()
+
+    async function registerForPushNotification(){
+        const {status} = await Permissions.getAsync(Permissions.NOTIFICATIONS);
+        if (status != 'granted') {
+            const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+            // finalStatus = status;
+        }
+        if (status !== 'granted') {
+            alert('Failed to get push token for push notification!');
+            return;
+        }
+        let token = (await Notifications.getExpoPushTokenAsync()).data;
+        return token
+    }
 
     const isAuth = async () => {
         try {
@@ -65,13 +91,12 @@ export default function App() {
     }
 
     useEffect(() => {
+        registerForPushNotification().then(token=>console.log(token));
         isAuth()
     }, [])
 
     if (isLoading) {
-        return (
-            <Loading/>
-        )
+        return <Loading/>
     }
 
     return (

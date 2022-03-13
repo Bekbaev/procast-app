@@ -1,9 +1,12 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View} from "react-native";
 import {useNavigation} from "@react-navigation/native";
+import {useDispatch} from "react-redux";
+import {reverseCastings} from "../redux/reducers/castingsReducer";
 
-const FilterButtons = () => {
+const FilterButtons = ({setFilteredCastingsArray, filteredCastingsArray, setForRender}) => {
     let [timeFilter, setTimeFilter] = useState(0)
+    const dispatch = useDispatch()
 
     let navigation = useNavigation()
 
@@ -13,6 +16,9 @@ const FilterButtons = () => {
         }else{
             setTimeFilter(0)
         }
+        // dispatch(reverseCastings() )
+        setFilteredCastingsArray(filteredCastingsArray.reverse())
+        setForRender(Math.random())
     }
 
     const toFilterScreen = () => {

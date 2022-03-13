@@ -20,6 +20,7 @@ export const fetchCastings = () => {
         dispatch(addCastings(castings))
     }
 }
+
 export const fetchMyCastings = () => {
     return async dispatch => {
         const castings = await castingApi.getMyCastings()
@@ -76,6 +77,25 @@ export const createCasting = (newCasting, imageUri) => {
         return true
     }
 }
+
+export const changeCasting = (newCasting, imageUri) => {
+    return async dispatch => {
+        //SAVE FILE
+        const form = new FormData();
+        form.append('image', {
+            uri : imageUri,
+            type : 'image/jpeg',
+            name : 'image.jpg'
+        });
+
+        const imageName = await fileApi.saveFile(form)
+        newCasting.image = 'http://food-j.kz/uploads/' + imageName
+        await castingApi.update(newCasting)
+        console.log(newCasting)
+        return true
+    }
+}
+
 export const fillProfile = (profileInfo, imageUri) => {
     return async dispatch => {
         //SAVE FILE

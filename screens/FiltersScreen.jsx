@@ -4,20 +4,20 @@ import {LinearGradient} from "expo-linear-gradient";
 import GradientBlock from "../components/GradientBlock";
 import castingTypes from "../common/enums/createCasting_types";
 import {useNavigation} from "@react-navigation/native";
+import {useDispatch} from "react-redux";
+import {filterCastings} from "../redux/reducers/castingsReducer";
+import {fetchCastings} from "../redux/reducers/asyncReducer";
 
 const FiltersScreen = () => {
-    const [category, setCategory] = useState('Фильм')
-    const [sex, setSex] = useState('Мужской')
     const [type, setType] = useState('Роль')
-    const [duration, setDuration] = useState('Смена')
-    const [race, setRace] = useState('Азиатский')
-    const [eye, setEye] = useState('Карий')
-    const [hair, setHair] = useState('Блонд')
-    const [language, setLanguage] = useState('Казахский')
-
+    const [city, setCity] = useState('Павлодар')
+    const [sex, setSex] = useState('Мужской')
+    const dispatch = useDispatch()
     let navigation = useNavigation()
 
-    const toHomeScreen = () => {
+    const  toHomeScreen = async () => {
+        dispatch(filterCastings({type, city, gender: sex}))
+
         navigation.navigate('Главная')
     }
 
@@ -29,51 +29,20 @@ const FiltersScreen = () => {
                 >
                 <Text style={styles.blockTitle}>Фильтры </Text>
 
-                    <GradientBlock marginTop="5">
+                    <GradientBlock marginTop="5" >
                         <View style={styles.formWrapper}>
                             <Text style={styles.formTitle}>
                                 Город
                             </Text>
                             <View style={styles.pickerWrapper}>
-                                <Picker style={styles.picker}>
-                                    <Picker.Item label="Павлодар" value="Pavlodar"/>
+                                <Picker selectedValue={city} onValueChange={itemValue => setCity(itemValue)} style={styles.picker}>
+                                    {castingTypes.city.map((el, i) => <Picker.Item key={el.city} label={el.city}
+                                                                                   value={el.city}/>)}
                                 </Picker>
                             </View>
                         </View>
                     </GradientBlock>
-                    <GradientBlock marginTop="5" colors='orange'>
-                        <View style={styles.formWrapper}>
-                            <Text style={styles.formTitle}>
-                                Категория проекта
-                            </Text>
-                            <View style={styles.pickerWrapper}>
-                                <Picker style={styles.picker} value={category}
-                                        selectedValue={category}
-                                        onValueChange={itemValue => setCategory(itemValue)}
-                                >
-                                    {castingTypes.category.map((el, i) => <Picker.Item key={i} label={el.name}
-                                                                                       value={el.value}/>)}
-                                </Picker>
-                            </View>
-                        </View>
-                    </GradientBlock>
-                    <GradientBlock marginTop="5">
-                        <View style={styles.formWrapper}>
-                            <Text style={styles.formTitle}>
-                                Пол
-                            </Text>
-                            <View style={styles.pickerWrapper}>
-                                <Picker style={styles.picker}
-                                        selectedValue={sex}
-                                        onValueChange={itemValue => setSex(itemValue)}
-                                >
-                                    <Picker.Item label="Мужчина" value="male"/>
-                                    <Picker.Item label="Женщина" value="famale"/>
-                                </Picker>
-                            </View>
-                        </View>
-                    </GradientBlock>
-                    <GradientBlock marginTop="5" colors='orange'>
+                    <GradientBlock marginTop="5" colors="orange" >
                         <View style={styles.formWrapper}>
                             <Text style={styles.formTitle}>
                                 Тип работы
@@ -89,83 +58,18 @@ const FiltersScreen = () => {
                             </View>
                         </View>
                     </GradientBlock>
-                    <GradientBlock marginTop="5">
+                    <GradientBlock marginTop="5" >
                         <View style={styles.formWrapper}>
                             <Text style={styles.formTitle}>
-                                Длительность
+                                Пол
                             </Text>
                             <View style={styles.pickerWrapper}>
                                 <Picker style={styles.picker}
-                                        selectedValue={duration}
-                                        onValueChange={itemValue => setDuration(itemValue)}
+                                        selectedValue={sex}
+                                        onValueChange={itemValue => setSex(itemValue)}
                                 >
-                                    {castingTypes.duration.map((el, i) => <Picker.Item key={i} label={el.name}
-                                                                                       value={el.value}/>)}
-                                </Picker>
-                            </View>
-                        </View>
-                    </GradientBlock>
-
-                    <GradientBlock marginTop="5">
-                        <View style={styles.formWrapper}>
-                            <Text style={styles.formTitle}>
-                                Типаж внешности
-                            </Text>
-                            <View style={styles.pickerWrapper}>
-                                <Picker style={styles.picker}
-                                        selectedValue={race}
-                                        onValueChange={itemValue => setRace(itemValue)}
-                                >
-                                    {castingTypes.race.map((el, i) => <Picker.Item key={i} label={el.name}
-                                                                                   value={el.value}/>)}
-                                </Picker>
-                            </View>
-                        </View>
-                    </GradientBlock>
-                    <GradientBlock marginTop="5" colors='orange'>
-                        <View style={styles.formWrapper}>
-                            <Text style={styles.formTitle}>
-                                Цвет глаз
-                            </Text>
-                            <View style={styles.pickerWrapper}>
-                                <Picker style={styles.picker}
-                                        selectedValue={eye}
-                                        onValueChange={itemValue => setEye(itemValue)}
-                                >
-                                    {castingTypes.eye.map((el, i) => <Picker.Item key={i} label={el.name}
-                                                                                  value={el.value}/>)}
-                                </Picker>
-                            </View>
-                        </View>
-                    </GradientBlock>
-                    <GradientBlock marginTop="5">
-                        <View style={styles.formWrapper}>
-                            <Text style={styles.formTitle}>
-                                Цвет волос
-                            </Text>
-                            <View style={styles.pickerWrapper}>
-                                <Picker style={styles.picker}
-                                        selectedValue={hair}
-                                        onValueChange={itemValue => setHair(itemValue)}
-                                >
-                                    {castingTypes.hair.map((el, i) => <Picker.Item key={i} label={el.name}
-                                                                                   value={el.value}/>)}
-                                </Picker>
-                            </View>
-                        </View>
-                    </GradientBlock>
-                    <GradientBlock marginTop="5" colors='orange'>
-                        <View style={styles.formWrapper}>
-                            <Text style={styles.formTitle}>
-                                Знание языков
-                            </Text>
-                            <View style={styles.pickerWrapper}>
-                                <Picker style={styles.picker}
-                                        selectedValue={language}
-                                        onValueChange={itemValue => setLanguage(itemValue)}
-                                >
-                                    {castingTypes.language.map((el, i) => <Picker.Item key={i} label={el.name}
-                                                                                       value={el.value}/>)}
+                                    <Picker.Item label="Мужчина" value="Мужчина"/>
+                                    <Picker.Item label="Женщина" value="Женщина"/>
                                 </Picker>
                             </View>
                         </View>

@@ -8,6 +8,7 @@ import {castingApi} from "../api/api";
 export default function UserResponsesScreen({navigation}) {
     const [users, setUsers] = useState([])
     const [usersCompleted, setUsersCompleted] = useState([])
+    const [usersRemoved, setUsersRemoved] = useState([])
     const route = useRoute();
     const {id, name} = route.params;
 
@@ -15,8 +16,10 @@ export default function UserResponsesScreen({navigation}) {
         try {
             const response = await castingApi.getRequested(id)
             const competed = await castingApi.getRequestedCompleted(id)
+            const removed = await castingApi.getRequestedRemoved(id)
             setUsers(response)
             setUsersCompleted(competed)
+            setUsersRemoved(removed)
         } catch (e) {
             setUsers([])
             // alert( JSON.stringify(e) )
@@ -42,9 +45,12 @@ export default function UserResponsesScreen({navigation}) {
                     users && users.map(u => <UserResponse navigation={navigation} key={u._id} {...u} casting_id={id} getUsers={getUsers}/>)
                 }
 
-                {/*{*/}
-                {/*    usersCompleted && usersCompleted.map((u, i) => <UserResponse text={'принят'} navigation={navigation} completed key={i} {...u} casting_id={id} getUsers={getUsers}/>)*/}
-                {/*}*/}
+                {
+                    usersCompleted && usersCompleted.map((u, i) => <UserResponse text={'принят'} navigation={navigation} completed key={u._id + '329'} {...u} casting_id={id} getUsers={getUsers}/>)
+                }
+                {
+                    usersRemoved && usersRemoved.map((u, i) => <UserResponse text={'Отклонен'} navigation={navigation} completed key={u._id + '329'} {...u} casting_id={id} getUsers={getUsers}/>)
+                }
             </View>
         </ScrollView>
     );

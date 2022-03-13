@@ -66,9 +66,21 @@ export const castingApi = {
         const {data} = await instance.get(`getRequestedCompleted/${id}`)
         return data
     },
+    async getRequestedRemoved(id) {
+        const {data} = await instance.get(`getRequestedRemoved/${id}`)
+        return data
+    },
     async create(obj) {
         try {
             const {data} = await instance.post('casting', obj)
+            return data
+        } catch (e) {
+            alert(e)
+        }
+    },
+    async update(obj) {
+        try {
+            const {data} = await instance.put('casting', obj)
             return data
         } catch (e) {
             alert(e)
@@ -83,6 +95,11 @@ export const castingApi = {
     removeRequest(casting_id) {
         return instance.delete(`request`, {data: {casting_id: casting_id}})
     },
+    deleteCasting(id){
+        const {data} = instance.delete(`casting/${id}`, {data: {id: id}})
+        return data
+    },
+
 }
 
 export const fileApi = {

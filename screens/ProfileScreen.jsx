@@ -18,7 +18,6 @@ const ProfileScreen = ({navigation}) => {
         setIsLoading(true)
         const response = await authApi.getMe()
         const myProfile = await authApi.getProfile()
-        // alert(JSON.stringify(myProfile ))
         setIsLoading(false)
         setProfile(myProfile)
         setInfo(response)
@@ -61,19 +60,19 @@ const ProfileScreen = ({navigation}) => {
 
                 <View style={[styles.infoBlock, {marginTop: 20}]}>
                     <View style={styles.infoBlockCategory}><Text style={styles.bold}>Возраст</Text></View>
-                    <GradientBlock>
+                    <GradientBlock colors='default'>
                         <Text style={styles.mainInfoText}>{profile ? fromDateToAge(profile.date) : 'Не указан'}</Text>
                     </GradientBlock>
                 </View>
                 <View style={styles.infoBlock}>
                     <View style={styles.infoBlockCategory}><Text style={styles.bold}>Вес</Text></View>
-                    <GradientBlock colors="orange">
+                    <GradientBlock colors='default'>
                         <Text style={styles.mainInfoText}>{profile ? profile?.height : 'Не указан'}</Text>
                     </GradientBlock>
                 </View>
                 <View style={styles.infoBlock}>
                     <View style={styles.infoBlockCategory}><Text style={styles.bold}>Рост</Text></View>
-                    <GradientBlock>
+                    <GradientBlock colors='default'>
                         <Text style={styles.mainInfoText}>{profile ? profile?.weight : 'Не указан'}</Text>
                     </GradientBlock>
                 </View>
@@ -81,43 +80,43 @@ const ProfileScreen = ({navigation}) => {
                 <View style={[styles.infoBlock, {marginTop: 20}]}>
                     <View style={styles.infoBlockCategory}><Text >Типаж внешности</Text></View>
 
-                    <GradientBlock colors="orange">
+                    <GradientBlock colors='default'>
                         <Text style={styles.mainInfoText}>{profile ? profile?.race : 'Не указан'}</Text>
                     </GradientBlock>
                 </View>
                 <View style={styles.infoBlock}>
                     <View style={styles.infoBlockCategory}><Text >Цвет глаз</Text></View>
-                    <GradientBlock>
+                    <GradientBlock colors='default'>
                         <Text style={styles.mainInfoText}>{profile ? profile?.eye : 'Не указан'}</Text>
                     </GradientBlock>
                 </View>
                 <View style={styles.infoBlock}>
                     <View style={styles.infoBlockCategory}><Text >Цвет волос</Text></View>
-                    <GradientBlock colors="orange">
+                    <GradientBlock colors='default'>
                         <Text style={styles.mainInfoText}>{profile ? profile?.hair : 'Не указан'}</Text>
                     </GradientBlock>
                 </View>
                 <View style={styles.infoBlock}>
                     <View style={styles.infoBlockCategory}><Text >Особые приметы или предпочтения</Text></View>
-                    <GradientBlock>
+                    <GradientBlock colors='default'>
                         <Text style={styles.mainInfoText}>{profile ? profile?.signs : 'Не указан'}</Text>
                     </GradientBlock>
                 </View>
                 <View style={styles.infoBlock}>
                     <View style={styles.infoBlockCategory}><Text >Знания языков</Text></View>
-                    <GradientBlock colors="orange">
+                    <GradientBlock colors='default'>
                         <Text style={styles.mainInfoText} >{profile ? profile?.language : 'Не указан'}</Text>
                     </GradientBlock>
                 </View>
                 <View style={styles.infoBlock}>
                     <View style={styles.infoBlockCategory}><Text >Город</Text></View>
-                    <GradientBlock>
+                    <GradientBlock colors='default'>
                         <Text style={styles.mainInfoText}>{profile ? profile?.city : 'Не указан'}</Text>
                     </GradientBlock>
                 </View>
                 <View style={styles.infoBlock}>
                     <View style={styles.infoBlockCategory}><Text >Опыт работы</Text></View>
-                    <GradientBlock colors="orange">
+                    <GradientBlock colors='default'>
                         <Text style={styles.mainInfoText}>{profile ? profile?.exp : 'Не указан'}</Text>
                     </GradientBlock>
                 </View>
@@ -127,7 +126,7 @@ const ProfileScreen = ({navigation}) => {
                 }
 
 
-                <GradientBlock marginTop="20">
+                <GradientBlock marginTop="20" >
                     <Text style={[styles.mainInfoText, styles.bold]}>{info?.phone}</Text>
                 </GradientBlock>
                 <GradientBlock marginTop="10" >

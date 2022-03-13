@@ -10,7 +10,8 @@ import {createCasting} from "../redux/reducers/asyncReducer";
 import * as ImagePicker from "expo-image-picker";
 
 const CreateCasting = () => {
-    const gradientColors = ['#dc4a5b', '#f5552b', '#f58e3c']
+    const gradientColors =['#585858', '#767676']
+    const gradientColors2 =['#dc4a5b', '#f5552b', '#f58e3c']
     const dispatch = useDispatch()
 
     const [city, setCity] = useState('Павлодар')
@@ -33,7 +34,7 @@ const CreateCasting = () => {
     const [image, setImage] = useState(null);
 
     const onChange = (event, selectedDate) => {
-        const currentDate = selectedDate || date;
+        let currentDate = selectedDate || date;
         setShow(Platform.OS === 'ios');
         setDate(currentDate);
     };
@@ -66,7 +67,6 @@ const CreateCasting = () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.Images,
             allowsEditing: true,
-            aspect: [6, 4],
             quality: 1,
         });
 
@@ -90,7 +90,7 @@ const CreateCasting = () => {
 
             <View style={styles.container}>
                 <LinearGradient
-                    colors={gradientColors}
+                    colors={gradientColors2}
                     start={{x: 0, y: 0}}
                     end={{x: 1, y: 0}}
                     style={styles.castingNameWrapper}
@@ -109,7 +109,7 @@ const CreateCasting = () => {
                         </Text>
                         <View style={styles.dateWrapper}>
                             <Text onPress={() => setShow(true)}
-                                  style={styles.dateItem}> {date.getDate()}.{date.getMonth()}.{date.getFullYear()} </Text>
+                                  style={styles.dateItem}> {date.getDate()}.{date.getMonth() + 1}.{date.getFullYear()} </Text>
                             <Ionicons name="arrow-down" size={16} color="black"/>
                         </View>
                     </View>
@@ -279,6 +279,8 @@ const CreateCasting = () => {
                                     selectedValue={eye}
                                     onValueChange={itemValue => setEye(itemValue)}
                             >
+                                <Picker.Item label='Не выбрано'
+                                             value=''/>
                                 {castingTypes.eye.map((el, i) => <Picker.Item key={i} label={el.name}
                                                                               value={el.value}/>)}
                             </Picker>
@@ -295,6 +297,8 @@ const CreateCasting = () => {
                                     selectedValue={hair}
                                     onValueChange={itemValue => setHair(itemValue)}
                             >
+                                <Picker.Item label='Не выбрано'
+                                             value=''/>
                                 {castingTypes.hair.map((el, i) => <Picker.Item key={i} label={el.name}
                                                                                value={el.value}/>)}
                             </Picker>
@@ -311,6 +315,8 @@ const CreateCasting = () => {
                                     selectedValue={language}
                                     onValueChange={itemValue => setLanguage(itemValue)}
                             >
+                                <Picker.Item label='Не выбрано'
+                                             value=''/>
                                 {castingTypes.language.map((el, i) => <Picker.Item key={i} label={el.name}
                                                                                    value={el.value}/>)}
                             </Picker>

@@ -1,20 +1,9 @@
 import {Alert} from "react-native";
 
 const initialState = {
-    castings: [
-        // {
-        //     'name': 'Форрест гамп',
-        //     'payment': '2000',
-        //     'id': '1',
-        //     'city': 'Акту',
-        //     'start_date': '21 апреля',
-        //     'added': false,
-        //     'favorite': false,
-        //     'image': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzK-9ZN3RqFK2FAUApOXhke96EzCeOGCG_TQ&usqp=CAU',
-        //     'category': 'Фильм'
-        // },
-    ],
+    castings: [],
     myCastings: [],
+    allCasting: [],
     isLoading: false
 };
 
@@ -23,7 +12,8 @@ const castingsReducer = (state = initialState, action) => {
         case `ADD_CASTING`: {
             return {
                 ...state,
-                castings: action.payload
+                castings: action.payload,
+                allCasting: action.payload
             }
         }
 
@@ -47,6 +37,28 @@ const castingsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 castings: newCastings
+            }
+        }
+
+        case `FILTER_CASTING`: {
+            let filteredCastings = state.allCasting
+
+            filteredCastings = filteredCastings.filter(el => el.type.includes(action.payload.type))
+            filteredCastings = filteredCastings.filter(el => el.city.includes(action.payload.city))
+            filteredCastings = filteredCastings.filter(el => el.gender.includes(action.payload.gender))
+            // for (let key in action.payload) {
+            //     filteredCastings = state.castings.filter(el => el[key].includes(action.payload[key]))
+            // }
+            return {
+                ...state,
+                castings: filteredCastings
+            }
+        }
+        case `REVERSE_CASTING`: {
+
+            return {
+                ...state,
+                castings: state.castings.reverse()
             }
         }
 
@@ -153,6 +165,14 @@ export const handleLoad = (payload) => ({
 export const searchCasting = (payload) => ({
     type: 'SEARCH_CASTING',
     payload: payload
+});
+
+export const filterCastings = (payload) => ({
+    type: 'FILTER_CASTING',
+    payload: payload
+});
+export const reverseCastings = () => ({
+    type: 'REVERSE_CASTING',
 });
 
 

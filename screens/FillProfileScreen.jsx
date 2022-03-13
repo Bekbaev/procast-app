@@ -11,6 +11,7 @@ import * as ImagePicker from 'expo-image-picker';
 import {useNavigation} from "@react-navigation/core";
 import Loading from "../components/Loading";
 import {authApi} from "../api/api";
+import {useFocusEffect} from "@react-navigation/native";
 
 ;
 
@@ -65,11 +66,19 @@ const FillProfileScreen = () => {
         setRace(myProfile?.race)
         setSigns(myProfile?.signsy)
         setWeight(myProfile?.weight)
+        setPhotos(myProfile?.photos.map(el => ('http://food-j.kz/uploads/' + el)) || [null, null, null])
+        console.log()
     }
 
     useEffect(() => {
         getMyInfo()
     }, [])
+
+    useFocusEffect(
+        React.useCallback(() => {
+            getMyInfo()
+        }, [])
+    );
 
     const createNewCasting = async () => {
         const profileInfo = {
@@ -99,7 +108,6 @@ const FillProfileScreen = () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.Images,
             allowsEditing: true,
-            aspect: [4, 3],
             quality: .5,
         });
 
@@ -163,7 +171,7 @@ const FillProfileScreen = () => {
                         </Text>
                         <View style={styles.dateWrapper}>
                             <Text onPress={() => setShow(true)}
-                                  style={styles.dateItem}> {date.getDate()}.{date.getMonth()}.{date.getFullYear()} </Text>
+                                  style={styles.dateItem}> {date.getDate()}.{date.getMonth() + 1}.{date.getFullYear()} </Text>
                             <Ionicons name="arrow-down" size={16} color="black"/>
                         </View>
                     </View>

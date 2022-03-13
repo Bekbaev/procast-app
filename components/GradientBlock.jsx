@@ -7,11 +7,19 @@ export default function GradientBlock(props) {
     let colors = '';
     switch (props.colors) {
         case 'orange': {
-            colors = ['#e1a64f', '#ffaf2c', '#fff82a']
+            colors = ['#585858', '#767676']
+            break
+        }
+        case 'default': {
+            colors = ['#585858', '#767676']
+            break
+        }
+        case 'red': {
+            colors = ['#dc4a5b', '#f5552b', '#f58e3c']
             break
         }
         default:
-            colors = ['#dc4a5b', '#f5552b', '#f58e3c']
+            colors = ['#585858', '#767676']
     }
 
     return (

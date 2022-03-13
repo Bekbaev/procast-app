@@ -63,19 +63,19 @@ const UserProfileScreen = () => {
 
                         <View style={[styles.infoBlock, {marginTop: 20}]}>
                             <View style={styles.infoBlockCategory}><Text style={styles.bold}>Возраст</Text></View>
-                            <GradientBlock>
+                            <GradientBlock colors='default'>
                                 <Text style={styles.mainInfoText}>{fromDateToAge(profile?.date)}</Text>
                             </GradientBlock>
                         </View>
                         <View style={styles.infoBlock}>
                             <View style={styles.infoBlockCategory}><Text style={styles.bold}>Вес</Text></View>
-                            <GradientBlock colors="orange">
+                            <GradientBlock colors="orange" colors='default'>
                                 <Text style={styles.mainInfoText}>{profile?.height}</Text>
                             </GradientBlock>
                         </View>
                         <View style={styles.infoBlock}>
                             <View style={styles.infoBlockCategory}><Text style={styles.bold}>Рост </Text></View>
-                            <GradientBlock>
+                            <GradientBlock colors='default'>
                                 <Text style={styles.mainInfoText}>{profile?.weight}</Text>
                             </GradientBlock>
                         </View>
@@ -83,43 +83,43 @@ const UserProfileScreen = () => {
                         <View style={[styles.infoBlock, {marginTop: 20}]}>
                             <View style={styles.infoBlockCategory}><Text >Типаж внешности</Text></View>
 
-                            <GradientBlock colors="orange">
+                            <GradientBlock colors='default'>
                                 <Text style={styles.mainInfoText}>{profile?.race}</Text>
                             </GradientBlock>
                         </View>
                         <View style={styles.infoBlock}>
                             <View style={styles.infoBlockCategory}><Text >Цвет глаз</Text></View>
-                            <GradientBlock>
+                            <GradientBlock colors='default'>
                                 <Text style={styles.mainInfoText}>{profile?.eye}</Text>
                             </GradientBlock>
                         </View>
                         <View style={styles.infoBlock}>
                             <View style={styles.infoBlockCategory}><Text >Цвет волос</Text></View>
-                            <GradientBlock colors="orange">
+                            <GradientBlock colors='default'>
                                 <Text style={styles.mainInfoText}>{profile?.hair}</Text>
                             </GradientBlock>
                         </View>
                         <View style={styles.infoBlock}>
                             <View style={styles.infoBlockCategory}><Text >Особые приметы или предпочтения</Text></View>
-                            <GradientBlock>
+                            <GradientBlock colors='default'>
                                 <Text style={styles.mainInfoText}>{profile?.signs}</Text>
                             </GradientBlock>
                         </View>
                         <View style={styles.infoBlock}>
                             <View style={styles.infoBlockCategory}><Text >Знания языков</Text></View>
-                            <GradientBlock colors="orange">
+                            <GradientBlock colors='default'>
                                 <Text style={styles.mainInfoText} >{profile?.language}</Text>
                             </GradientBlock>
                         </View>
                         <View style={styles.infoBlock}>
                             <View style={styles.infoBlockCategory}><Text >Город</Text></View>
-                            <GradientBlock>
+                            <GradientBlock colors='default'>
                                 <Text style={styles.mainInfoText}>{profile?.city}</Text>
                             </GradientBlock>
                         </View>
                         <View style={styles.infoBlock}>
                             <View style={styles.infoBlockCategory}><Text >Опыт работы</Text></View>
-                            <GradientBlock colors="orange">
+                            <GradientBlock colors='default'>
                                 <Text style={styles.mainInfoText}>{profile?.exp}</Text>
                             </GradientBlock>
                         </View>

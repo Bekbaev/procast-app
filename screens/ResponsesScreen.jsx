@@ -68,7 +68,7 @@ export default function ResponsesScreen({navigation }) {
                         </View>
 
                         <View style={styles.responseStatusWrapper}>
-                            <View style={[styles.responseStatus, {backgroundColor: getResponseStatusColor(c.status)}]}>
+                            <View style={[styles.responseStatus, {backgroundColor: getResponseStatusColor(c.status), borderRadius: 15}]}>
                                 <Text style={styles.responseStatusText}>{getResponseText(c.status) }</Text>
                             </View>
                         </View>
@@ -90,12 +90,13 @@ const styles = StyleSheet.create({
     },
     responseStatusWrapper: {
         flex: 1,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        borderRadius: 15
     },
     responseStatusText: {
         textAlign: 'center',
         marginTop: -3,
-        color: '#fff'
+        color: '#fff',
     },
     responseStatus: {
         padding: 10,

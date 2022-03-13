@@ -2,6 +2,7 @@
   "expo": {
     "name": "procast-app",
     "description": "your app desc",
+    "icon": "./assets/icon.png",
     "ios": {
       "supportsTablet": true
     },

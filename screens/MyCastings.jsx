@@ -3,6 +3,7 @@ import {StyleSheet, Text, View, ScrollView} from "react-native";
 import CastingBlock from "../components/CastingBlock";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchMyCastings} from "../redux/reducers/asyncReducer";
+import {useFocusEffect} from "@react-navigation/native";
 
 
 export default function MyCastings({navigation}) {
@@ -14,9 +15,13 @@ export default function MyCastings({navigation}) {
         dispatch(fetchMyCastings())
     }, [])
 
-    if(castingsArray.length == 0) {
-        return <><Text>Тут будет загрузка</Text></>
-    }
+
+    useFocusEffect(
+        React.useCallback(() => {
+            dispatch(fetchMyCastings())
+        }, [])
+    );
+
 
     return (
         <ScrollView>

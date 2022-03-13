@@ -8,6 +8,7 @@ import {searchCasting} from "../redux/reducers/castingsReducer";
 import FilterSwiper from "../components/FilterSwiper";
 import FilterButtons from "../components/FilterButtons";
 import Loading from "../components/Loading";
+import {useFocusEffect} from "@react-navigation/native";
 
 
 export default function HomeScreen({navigation}) {
@@ -18,6 +19,7 @@ export default function HomeScreen({navigation}) {
     let castingsArray = useSelector(state => state.castingsReducer.castings);
     const [filteredCastingsArray, setFilteredCastingsArray] = useState(castingsArray)
     const [isLoading, setIsLoading] = useState(true)
+    const [forRender, setForRender] = useState(0)
 
     const search = (text) => {
         if(text){
@@ -43,6 +45,17 @@ export default function HomeScreen({navigation}) {
             setIsLoading(false)
         }, 2000)
     }, [])
+
+    useFocusEffect(
+        React.useCallback(() => {
+            setIsLoading(true)
+            dispatch(fetchCastings())
+            setTimeout(()=>{
+                setIsLoading(false)
+            }, 1000)
+        }, [])
+    );
+
 
     if(isLoading){
         return <Loading />
@@ -75,9 +88,9 @@ export default function HomeScreen({navigation}) {
                     style={styles.filterWrapper}
                 >
                     <Text style={styles.blockTitle}>Категории </Text>
-                    <FilterSwiper setFilterState={setFilterState}/>
+                    <FilterSwiper  setFilterState={setFilterState}/>
                 </LinearGradient>
-                <FilterButtons />
+                <FilterButtons setForRender={setForRender} filteredCastingsArray={filteredCastingsArray} setFilteredCastingsArray={setFilteredCastingsArray}/>
 
 
                 { filteredCastingsArray.map(c => <CastingBlock navigation={navigation} key={c._id} casting={c} dispatch={dispatch}/>) }

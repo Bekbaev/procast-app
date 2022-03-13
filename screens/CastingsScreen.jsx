@@ -2,28 +2,40 @@ import React, {useEffect, useState} from 'react';
 import {Image, ScrollView, StyleSheet, Text, View} from "react-native";
 import GradientBlock from "../components/GradientBlock";
 import { castingApi} from "../api/api";
-import { useRoute } from '@react-navigation/native';
+import {useFocusEffect, useRoute} from '@react-navigation/native';
+import Loading from "../components/Loading";
 
 const CastingScreen = () => {
     const [info, setInfo] = useState({})
     const route = useRoute();
     const { id } = route.params;
+    const [isLoading, setIsLoading] = useState(true)
 
     const getInfo = async () => {
+        setIsLoading(true)
         const response = await castingApi.getById(id)
-
         setInfo(response)
+        setIsLoading(false)
     }
 
     useEffect(() => {
         getInfo()
-    }, [id])
+    }, [])
 
+    useFocusEffect(
+        React.useCallback(() => {
+            getInfo()
+        }, [id])
+    );
+
+    if(isLoading){
+        return <Loading />
+    }
 
     return (
         <ScrollView>
             <View style={styles.container}>
-                <GradientBlock  >
+                <GradientBlock colors="red" >
                     <Text style={[styles.mainInfoText, styles.bold]}>{info?.name}</Text>
                 </GradientBlock>
 
@@ -79,7 +91,7 @@ const CastingScreen = () => {
                 <View style={styles.infoBlock}>
                     <View style={styles.infoBlockCategory}><Text style={styles.bold}>Рост</Text></View>
                     <View style={styles.backGroundBlock}>
-                        <Text style={styles.mainInfoText}>{info.height}</Text>
+                        <Text style={styles.mainInfoText}>{info.weight}</Text>
                     </View>
                 </View>
                 <View style={[styles.infoBlock, {flexDirection: 'column',}]}>
@@ -95,7 +107,7 @@ const CastingScreen = () => {
                 <View style={[styles.infoBlock, {marginTop: 20}]}>
                     <View style={styles.infoBlockCategory}><Text style={styles.bold}>Вес</Text></View>
                     <View style={styles.backGroundBlock}>
-                        <Text style={styles.mainInfoText}>{info.weight}</Text>
+                        <Text style={styles.mainInfoText}>{info.height}</Text>
                     </View>
                 </View>
                 <View style={styles.infoBlock}>
