@@ -14,6 +14,7 @@ import {castingApi} from "../api/api";
 export default function CastingBlock({casting, dispatch, navigation, myCasting = false, change = false}) {
     const gradientColors = ['#dc4a5b', '#f5552b', '#f58e3c']
     const gradientColorsAdded = ['#e1a64f', '#ffaf2c', '#fff82a']
+    const grey = ['#898989', '#898989']
     const castingId = casting._id
     const role = useSelector(state => state.userReducer.role);
 
@@ -78,7 +79,7 @@ export default function CastingBlock({casting, dispatch, navigation, myCasting =
                     style={styles.castingHeaderIcon}
                 >
                     <Ionicons onPress={handleFavorite} name="star" size={26}
-                              color={casting.favorite ? 'green' : 'red'}/>
+                              color={casting.favorite ? 'green' : 'white'}/>
                 </View>
             </LinearGradient>
             <LinearGradient
@@ -130,7 +131,7 @@ export default function CastingBlock({casting, dispatch, navigation, myCasting =
                     onPress={handleRequest}
                 >
                     <LinearGradient
-                        colors={casting.added ? gradientColorsAdded : gradientColors}
+                        colors={casting.added ? gradientColorsAdded : grey}
                         start={{x: 0, y: 0}}
                         end={{x: 1, y: 0}}
                         style={styles.sendRequestButton}
@@ -231,7 +232,7 @@ const styles = StyleSheet.create({
         padding: 5,
         borderRadius: 15,
         width: '100%',
-        marginTop: 10
+        marginTop: 20
     },
     castingHeader: {
         width: '100%',

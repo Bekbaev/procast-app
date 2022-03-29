@@ -40,7 +40,7 @@ export default function HomeScreen({navigation}) {
     useEffect(() => {
         if(!saveState){
             if(!castingsArray.length){
-                alert('По данным фильтрам ничего не было найдено.')
+                // alert('По данным фильтрам ничего не было найдено.')
                 dispatch(fetchCastings())
             }
         }

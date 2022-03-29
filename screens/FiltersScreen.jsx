@@ -25,6 +25,11 @@ const FiltersScreen = () => {
         navigation.goBack()
     }
 
+    const filterRemove = async () => {
+        await dispatch(fetchCastings())
+        navigation.goBack()
+    }
+
     return (
         <ScrollView>
             <View style={styles.container}>
@@ -85,6 +90,14 @@ const FiltersScreen = () => {
                             style={styles.buttonWrapper}
                         >
                             <Text  style={styles.buttonText}>Применить</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.buttons}>
+                        <TouchableOpacity
+                            onPress={ filterRemove }
+                            style={styles.buttonWrapperBack}
+                        >
+                            <Text  style={styles.buttonText}>Сбросить фильтры</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -189,11 +202,17 @@ const styles = StyleSheet.create({
         padding: 10
     },
     buttons: {
-        marginTop: 20,
+        marginTop: 10,
         width: '100%',
     },
     buttonWrapper: {
         backgroundColor: 'rgba(65,172,35,0.6)',
+        padding: 14,
+        marginBottom: 10,
+        borderRadius: 10
+    },
+    buttonWrapperBack: {
+        backgroundColor: 'rgba(176,182,5,0.6)',
         padding: 14,
         marginBottom: 10,
         borderRadius: 10
