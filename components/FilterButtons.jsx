@@ -22,7 +22,7 @@ const FilterButtons = ({setFilteredCastingsArray, filteredCastingsArray, setForR
     }
 
     const toFilterScreen = () => {
-        navigation.navigate('FiltersScreen')
+        navigation.navigate('FiltersScreen', )
     }
 
 

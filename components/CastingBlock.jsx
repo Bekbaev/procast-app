@@ -8,6 +8,7 @@ import {
 } from "../redux/reducers/castingsReducer";
 import { useSelector} from "react-redux";
 import {createRequest, deleteRequest} from "../redux/reducers/asyncReducer";
+import {castingApi} from "../api/api";
 
 
 export default function CastingBlock({casting, dispatch, navigation, myCasting = false, change = false}) {
@@ -38,6 +39,8 @@ export default function CastingBlock({casting, dispatch, navigation, myCasting =
     }
 
     const handleFavorite = () => {
+        castingApi.toSavedCastings(castingId)
+
         if (casting.favorite) {
             dispatch(removeFromFavorite(castingId))
         } else {

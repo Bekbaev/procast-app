@@ -136,11 +136,13 @@ export const fillProfile = (profileInfo, imageUri) => {
             profileInfo.photos[2] = await fileApi.saveFile(form)
         }
 
-        const imageName = await fileApi.saveFile(form)
-        profileInfo.image = 'http://food-j.kz/uploads/' + imageName
+        if(imageUri){
+            const imageName = await fileApi.saveFile(form)
+            profileInfo.image = 'http://food-j.kz/uploads/' + imageName
+        }
+
         // alert(JSON.stringify(profileInfo))
         await authApi.fillProfile(profileInfo)
-
         // return true
     }
 }

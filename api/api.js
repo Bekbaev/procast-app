@@ -99,6 +99,18 @@ export const castingApi = {
         const {data} = instance.delete(`casting/${id}`, {data: {id: id}})
         return data
     },
+    async toSavedCastings(id){
+        const {data} = await instance.post(`savedCastings`, {id})
+        return data
+    },
+    async fetchSavedCastings(){
+        const {data} = await instance.get('savedCastings')
+        return data
+    },
+    async deleteSavedCasting(id){
+        const {data} = await instance.delete(`casting/${id}`, {data: {id: id}})
+        return data
+    },
 
 }
 

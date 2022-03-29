@@ -22,7 +22,6 @@ export default function UserResponsesScreen({navigation}) {
             setUsersRemoved(removed)
         } catch (e) {
             setUsers([])
-            // alert( JSON.stringify(e) )
         }
     }
 

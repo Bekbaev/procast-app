@@ -40,12 +40,11 @@ const CreateCasting = () => {
     };
 
     const createNewCasting = () => {
-        // alert( JSON.stringify(imageFile) )
         const newCasting = {
             'name': name,
             'payment': payment,
             'city': city,
-            'start_date': `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`,
+            'start_date': `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`,
             'category': category,
             'type': type,
             'gender': sex,
@@ -60,7 +59,6 @@ const CreateCasting = () => {
         }
 
         dispatch(createCasting(newCasting, image))
-
     }
 
     const pickImage = async () => {

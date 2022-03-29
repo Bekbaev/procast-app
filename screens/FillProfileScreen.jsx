@@ -36,6 +36,7 @@ const FillProfileScreen = () => {
     const [photos, setPhotos] = useState([null, null, null])
     const [forRender, setForRender] = useState(null)
     const [exp, setExpt] = useState('')
+    const [languageArr, setLanguageArr] = useState([])
 
     const [info, setInfo] = useState({})
     const [profile, setProfile] = useState(null)
@@ -48,26 +49,32 @@ const FillProfileScreen = () => {
         setDate(currentDate);
     };
 
+    const addNewLanguage = () => {
+        console.log(languageArr.length)
+        setLanguageArr([...languageArr, []])
+        console.log(languageArr.length)
+    }
+
     const getMyInfo = async () => {
         const response = await authApi.getMe()
         const myProfile = await authApi.getProfile()
+
         setProfile(myProfile)
         setInfo(response)
         setIsLoading(false)
         console.log(myProfile)
         setCity(myProfile?.city)
         setExpt(myProfile?.exp)
-        setEye(myProfile?.eye)
+        setEye(myProfile?.eye || 'Карий')
         setSex(myProfile?.gender)
-        setHair(myProfile?.hair)
+        setHair(myProfile?.hair || 'Шатен')
         setHeight(myProfile?.height)
         setImage(myProfile?.image)
-        setLanguage(myProfile?.language)
-        setRace(myProfile?.race)
-        setSigns(myProfile?.signsy)
+        setLanguage(myProfile?.language || 'Казахский')
+        setRace(myProfile?.race || 'Азиатский')
+        setSigns(myProfile?.signs)
         setWeight(myProfile?.weight)
         setPhotos(myProfile?.photos.map(el => ('http://food-j.kz/uploads/' + el)) || [null, null, null])
-        console.log()
     }
 
     useEffect(() => {
@@ -96,12 +103,20 @@ const FillProfileScreen = () => {
             'date': JSON.stringify(date),
             'exp': exp
         }
+
+        if(languageArr){
+            const newLanguages = []
+            languageArr.forEach(el => {
+                newLanguages.push(el)
+            })
+            profileInfo.language = profileInfo.language + ', ' + newLanguages.join(', ')
+        }
+        console.log(profileInfo.language)
         setIsLoading(true)
         await dispatch(fillProfile(profileInfo, image))
         setIsLoading(false)
         alert('Профиль успешно заполнен')
         navigation.navigate('Главная')
-        // alert(JSON.stringify(profileInfo))
     }
 
     const pickImage = async () => {
@@ -120,7 +135,7 @@ const FillProfileScreen = () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.Images,
             allowsEditing: true,
-            aspect: [4, 3],
+            aspect: [4, 4],
             quality: .5,
         });
 
@@ -316,9 +331,40 @@ const FillProfileScreen = () => {
                                 {castingTypes.language.map((el, i) => <Picker.Item key={i} label={el.name}
                                                                                    value={el.value}/>)}
                             </Picker>
+
                         </View>
                     </View>
                 </GradientBlock>
+                {
+                    languageArr.map((el, i) => (
+                        <GradientBlock marginTop="5" colors='orange'>
+                            <View style={styles.formWrapper}>
+                                <Text style={styles.formTitle}>
+                                    Знание языков
+                                </Text>
+                                <View style={styles.pickerWrapper}>
+                                    <Picker style={styles.picker}
+                                            selectedValue={languageArr[i]}
+                                            onValueChange={itemValue => {
+                                                let newLangArr = languageArr
+                                                newLangArr[i] = itemValue
+                                                setLanguageArr([...newLangArr])
+                                                console.log(languageArr)
+                                            } }
+                                    >
+                                        {castingTypes.language.map((el, i) => <Picker.Item key={i} label={el.name}
+                                                                                           value={el.value}/>)}
+                                    </Picker>
+
+                                </View>
+                            </View>
+                        </GradientBlock>
+                    ))
+                }
+                <TouchableOpacity style={styles.addPhotoButton} onPress={ addNewLanguage }>
+                    <Text style={styles.addPhotoButtonText}>Добавить язык</Text>
+                </TouchableOpacity>
+
                 <GradientBlock marginTop="5">
                     <View style={styles.formWrapper}>
                         <Text style={styles.formTitle}>
@@ -341,7 +387,7 @@ const FillProfileScreen = () => {
                                 <Text style={styles.addPhotoButtonText} onPress={() => pickProfileImage(index)}>Добавить фото</Text>
                             </View>
 
-                            {photos[index] && <Image source={{ uri: photos[index] }} style={{ width: '96%', height: 300 }} />}
+                            {photos[index] && <Image source={{ uri: photos[index] }} style={{ width: '96%', height: 400 }} />}
                         </>
                     ))
                 }
@@ -475,6 +521,11 @@ const styles = StyleSheet.create({
         marginTop: 10,
         width: '90%',
         justifyContent: 'space-between'
+    },
+    addNewLang: {
+        backgroundColor: '#898989',
+        width: '100%'
+
     }
 })
 

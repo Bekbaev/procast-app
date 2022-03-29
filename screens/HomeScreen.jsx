@@ -8,7 +8,7 @@ import {searchCasting} from "../redux/reducers/castingsReducer";
 import FilterSwiper from "../components/FilterSwiper";
 import FilterButtons from "../components/FilterButtons";
 import Loading from "../components/Loading";
-import {useFocusEffect} from "@react-navigation/native";
+import {useFocusEffect, useRoute} from "@react-navigation/native";
 
 
 export default function HomeScreen({navigation}) {
@@ -20,6 +20,8 @@ export default function HomeScreen({navigation}) {
     const [filteredCastingsArray, setFilteredCastingsArray] = useState(castingsArray)
     const [isLoading, setIsLoading] = useState(true)
     const [forRender, setForRender] = useState(0)
+    const route = useRoute();
+    const saveState = route.params?.saveState;
 
     const search = (text) => {
         if(text){
@@ -31,10 +33,18 @@ export default function HomeScreen({navigation}) {
         setSearchText(text)
     }
 
+    // useEffect(() => {
+    //     filteredCastingsArray(castingsArray)
+    // }, [castingsArray])
+
     useEffect(() => {
-        if(!castingsArray.length){
-            dispatch(fetchCastings())
+        if(!saveState){
+            if(!castingsArray.length){
+                alert('По данным фильтрам ничего не было найдено.')
+                dispatch(fetchCastings())
+            }
         }
+
 
         setFilteredCastingsArray(castingsArray.filter(casting => casting.category.includes(filterState)))
 
@@ -46,15 +56,18 @@ export default function HomeScreen({navigation}) {
         }, 2000)
     }, [])
 
-    useFocusEffect(
-        React.useCallback(() => {
-            setIsLoading(true)
-            dispatch(fetchCastings())
-            setTimeout(()=>{
-                setIsLoading(false)
-            }, 1000)
-        }, [])
-    );
+    // useFocusEffect(
+    //     React.useCallback(() => {
+    //
+    //         if(!saveState){
+    //             setIsLoading(true)
+    //             dispatch(fetchCastings())
+    //             setTimeout(()=>{
+    //                 setIsLoading(false)
+    //             }, 1000)
+    //         }
+    //     }, [])
+    // );
 
 
     if(isLoading){

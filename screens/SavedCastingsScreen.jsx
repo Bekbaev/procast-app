@@ -1,13 +1,26 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View, ScrollView, TextInput } from "react-native";
 import {LinearGradient} from "expo-linear-gradient";
 import CastingBlock from "../components/CastingBlock";
 import {useDispatch, useSelector} from "react-redux";
+import {castingApi} from "../api/api";
 
 export default function SavedCastingsScreen({navigation }) {
     const gradientColors = ['#dc4a5b', '#f5552b', '#f58e3c']
-    const castingsArray = useSelector(state => state.castingsReducer.castings.filter(c => c.favorite === true));
     const dispatch = useDispatch()
+    const [castings, setCastings] = useState([])
+    const [loading, setLoading] = useState(true)
+
+    const getCastings = async () => {
+        const response = await castingApi.fetchSavedCastings()
+        console.log(response)
+        setCastings(response)
+        setLoading(false)
+    }
+
+    useEffect(() => {
+        getCastings()
+    }, [])
 
     return (
         <ScrollView>
@@ -49,7 +62,7 @@ export default function SavedCastingsScreen({navigation }) {
                 {/*    </LinearGradient>*/}
                 {/*</View>*/}
 
-                { castingsArray.map(casting => <CastingBlock navigation={navigation} key={casting._id} casting={casting} dispatch={dispatch} />) }
+                { castings && castings.map(casting => <CastingBlock navigation={navigation} key={casting._id} casting={casting} dispatch={dispatch} /> )}
 
             </View >
         </ScrollView>

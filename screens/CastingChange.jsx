@@ -88,7 +88,7 @@ const CastingChange = ({navigation}) => {
             'name': name,
             'payment': payment,
             'city': city,
-            'start_date': `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`,
+            'start_date': `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`,
             'category': category,
             'type': type,
             'gender': sex,

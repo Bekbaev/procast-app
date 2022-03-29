@@ -15,10 +15,14 @@ const FiltersScreen = () => {
     const dispatch = useDispatch()
     let navigation = useNavigation()
 
-    const  toHomeScreen = async () => {
+    const toHomeScreen = async () => {
+        console.log({type, city, gender: sex})
         dispatch(filterCastings({type, city, gender: sex}))
 
-        navigation.navigate('Главная')
+        // navigation.navigate('Главная', {
+        //     saveState: true
+        // })
+        navigation.goBack()
     }
 
     return (

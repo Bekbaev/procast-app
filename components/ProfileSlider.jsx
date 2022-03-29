@@ -66,7 +66,7 @@ const renderItem = ({item,index}) => {
                 style={{
                     backgroundColor:'floralwhite',
                     borderRadius: 5,
-                    height: 200,
+                    height: 300,
                 }}
                 source={{
                     uri: 'http://food-j.kz/uploads/' + item,

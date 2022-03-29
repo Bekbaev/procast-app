@@ -43,12 +43,14 @@ const castingsReducer = (state = initialState, action) => {
         case `FILTER_CASTING`: {
             let filteredCastings = state.allCasting
 
+            console.log(filteredCastings.length)
             filteredCastings = filteredCastings.filter(el => el.type.includes(action.payload.type))
             filteredCastings = filteredCastings.filter(el => el.city.includes(action.payload.city))
             filteredCastings = filteredCastings.filter(el => el.gender.includes(action.payload.gender))
             // for (let key in action.payload) {
             //     filteredCastings = state.castings.filter(el => el[key].includes(action.payload[key]))
             // }
+            console.log(filteredCastings.length)
             return {
                 ...state,
                 castings: filteredCastings
