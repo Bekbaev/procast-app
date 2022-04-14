@@ -79,7 +79,7 @@ export default function CastingBlock({casting, dispatch, navigation, myCasting =
                     style={styles.castingHeaderIcon}
                 >
                     <Ionicons onPress={handleFavorite} name="star" size={26}
-                              color={casting.favorite ? 'green' : 'white'}/>
+                              color={casting.favorite ? 'yellow' : 'green'}/>
                 </View>
             </LinearGradient>
             <LinearGradient
@@ -209,16 +209,17 @@ const styles = StyleSheet.create({
     },
     castingInfoTitleWrapper: {
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
     },
     castingInfoSubtitle: {
         marginBottom: 8,
         fontWeight: 'bold',
+        color: '#ffffff'
     },
     castingInfoTitle: {
         fontSize: 16,
         marginTop: -13,
-        color: '#1a1a1a'
+        color: '#ffffff'
     },
     castingInfo: {
         width: '100%',

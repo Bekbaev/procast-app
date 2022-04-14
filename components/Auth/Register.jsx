@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import InputText from "../InputText";
+import PasswordInputText from 'react-native-hide-show-password-input';
 
 const Auth = ({setShowRegistration, errorText, register}) => {
     const [phone, setPhone] = useState('')
@@ -9,6 +10,8 @@ const Auth = ({setShowRegistration, errorText, register}) => {
     const [email, setEmail] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [type, setType] = useState(0)
+    const [isSecureEntry, setIsSecureEntry] = useState(true);
+
 
     const registerButtonPress = async () => {
         if(confirmPassword !== password){
@@ -26,6 +29,8 @@ const Auth = ({setShowRegistration, errorText, register}) => {
 
     }
 
+
+
     return (
         <>
             <View style={styles.inputBackground}>
@@ -37,33 +42,41 @@ const Auth = ({setShowRegistration, errorText, register}) => {
                             Кастинг директор
                     </Text>
                 </View>
-                <Text style={styles.inputTitle}>Фио</Text>
+                <Text style={styles.inputTitle}>ФИО</Text>
                 <InputText
+                    placeholder="прим: Калиев Тимур Серикович"
                     value={name}
                     onChangeText={text => setName(text)}
                 />
                 <Text style={styles.inputTitle}>Номер телефона</Text>
                 <InputText
+                    placeholder="прим: 87767654422"
                     value={phone}
                     onChangeText={text => setPhone(text)}
                     keyboardType='numeric'
                 />
                 <Text style={styles.inputTitle}>E-mail</Text>
                 <InputText
+                    placeholder="прим: test@gmail.com"
                     value={email}
                     onChangeText={text => setEmail(text)}
                 />
-                <Text style={styles.inputTitle}>Пароль</Text>
-                <InputText
+                {/*<Text style={styles.inputTitle}>Пароль</Text>*/}
+                <PasswordInputText
                     value={password}
                     onChangeText={text => setPassword(text)}
-                    secureTextEntry={true}
+                    placeholder='прим: sFY1AxWi'
+                    label="Пароль"
+                    style={styles.input}
+
                 />
-                <Text style={styles.inputTitle}>Подтвердите пароль</Text>
-                <InputText
+
+                {/*<Text style={styles.inputTitle}>Подтвердите пароль</Text>*/}
+                <PasswordInputText
                     value={confirmPassword}
                     onChangeText={text => setConfirmPassword(text)}
-                    secureTextEntry={true}
+                    label="Подтвердите пароль"
+                    style={styles.input}
                 />
             </View>
             {
@@ -111,6 +124,12 @@ const styles = StyleSheet.create({
         padding: 20,
         width: '92%',
         borderRadius: 20
+    },
+    input: {
+        paddingTop: 5,
+        width: '100%',
+        borderRadius: 10,
+        marginBottom: 5,
     },
     inputTitle: {
         marginBottom: 5

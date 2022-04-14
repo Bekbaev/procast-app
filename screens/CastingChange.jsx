@@ -162,18 +162,18 @@ const CastingChange = ({navigation}) => {
                 {/*    />*/}
                 {/*    <Text style={styles.castingName} >название проекта(изменить нельзя)</Text>*/}
                 {/*</LinearGradient>*/}
-                {/*<GradientBlock marginTop="5" colors='orange'>*/}
-                {/*    <View style={styles.formWrapper}>*/}
-                {/*        <Text style={styles.formTitle}>*/}
-                {/*            Дата начала сьемок*/}
-                {/*        </Text>*/}
-                {/*        <View style={styles.dateWrapper}>*/}
-                {/*            <Text onPress={() => setShow(true)}*/}
-                {/*                  style={styles.dateItem}> {date.getDate()}.{date.getMonth()}.{date.getFullYear()} </Text>*/}
-                {/*            <Ionicons name="arrow-down" size={16} color="black"/>*/}
-                {/*        </View>*/}
-                {/*    </View>*/}
-                {/*</GradientBlock>*/}
+                <GradientBlock marginTop="5" colors='orange'>
+                    <View style={styles.formWrapper}>
+                        <Text style={styles.formTitle}>
+                            Дата начала сьемок
+                        </Text>
+                        <View style={styles.dateWrapper}>
+                            <Text onPress={() => setShow(true)}
+                                  style={styles.dateItem}> {date.getDate()}.{date.getMonth() + 1}.{date.getFullYear()} </Text>
+                            <Ionicons name="arrow-down" size={16} color="black"/>
+                        </View>
+                    </View>
+                </GradientBlock>
                 <GradientBlock marginTop="5">
                     <View style={styles.formWrapper}>
                         <Text style={styles.formTitle}>

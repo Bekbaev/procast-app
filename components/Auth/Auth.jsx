@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Image, AsyncStorage , StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import InputText from "../InputText";
+import PasswordInputText from "react-native-hide-show-password-input";
 
 const Auth = ({singIn, setShowRegistration, errorText}) => {
     const [phone, setPhone] = useState('')
@@ -13,22 +14,26 @@ const Auth = ({singIn, setShowRegistration, errorText}) => {
                     <InputText
                         value={phone}
                         onChangeText={text => setPhone(text)}
+                        placeholder="прим: 87767654422"
                         keyboardType='numeric'
                     />
                     <Text style={styles.inputTitle}>Пароль</Text>
-                    <InputText
+                    <PasswordInputText
                         value={password}
                         onChangeText={text => setPassword(text)}
-                        secureTextEntry={true}
+                        placeholder=''
+                        label=""
+                        style={styles.input}
+
                     />
                 </View>
                 {
                     errorText.auth != '' && <Text style={styles.error}>{errorText.auth}</Text>
                 }
-                <View style={styles.textButtons}>
-                    <Text>Пропустить</Text>
-                    <Text>Забыли пароль ?</Text>
-                </View>
+                {/*<View style={styles.textButtons}>*/}
+                {/*    <Text>Пропустить</Text>*/}
+                {/*    <Text>Забыли пароль ?</Text>*/}
+                {/*</View>*/}
                 <View style={styles.buttons}>
                     <TouchableOpacity
                         onPress={ () => singIn(phone, password) }
@@ -76,7 +81,7 @@ const styles = StyleSheet.create({
         borderRadius: 20
     },
     inputTitle: {
-        marginBottom: 5
+        marginTop: 10
     },
     buttons: {
         marginTop: 20,

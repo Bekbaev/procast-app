@@ -8,6 +8,7 @@ const InputText = (props) => {
             editable
             maxLength={40}
             style={styles.input}
+
         />
     );
 };
@@ -16,9 +17,10 @@ const styles = StyleSheet.create({
     input: {
         padding: 5,
         width: '100%',
-        backgroundColor: '#dcdcdc',
+        borderBottomColor: 'rgba(0,0,0,0.47)',
+        borderBottomWidth: 1,
         borderRadius: 10,
-        marginBottom: 5
+        marginBottom: 5,
     },
 })
 

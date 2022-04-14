@@ -56,18 +56,18 @@ export default function HomeScreen({navigation}) {
         }, 2000)
     }, [])
 
-    // useFocusEffect(
-    //     React.useCallback(() => {
-    //
-    //         if(!saveState){
-    //             setIsLoading(true)
-    //             dispatch(fetchCastings())
-    //             setTimeout(()=>{
-    //                 setIsLoading(false)
-    //             }, 1000)
-    //         }
-    //     }, [])
-    // );
+    useFocusEffect(
+        React.useCallback(() => {
+
+            if(!saveState){
+                setIsLoading(true)
+                dispatch(fetchCastings())
+                setTimeout(()=>{
+                    setIsLoading(false)
+                }, 1000)
+            }
+        }, [])
+    );
 
 
     if(isLoading){

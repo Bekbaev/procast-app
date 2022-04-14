@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Image, ScrollView, StyleSheet, Text, View} from "react-native";
+import {Image, ScrollView, StyleSheet, Text, View, Linking, TouchableOpacity} from "react-native";
 import GradientBlock from "../components/GradientBlock";
 import ProfileCompletedBar from "../components/ProfileCompletedBar";
 import {authApi} from "../api/api";
@@ -14,6 +14,10 @@ const UserProfileScreen = () => {
     const [isLoading, setIsLoading] = useState(true)
     const route = useRoute();
     const id = route.params?.id;
+
+    const openUrl = (url) => {
+        Linking.openURL(url)
+    }
 
     const getUserInfo = async () => {
         setIsLoading(true)
@@ -129,10 +133,14 @@ const UserProfileScreen = () => {
                     </>
                 }
                 <GradientBlock marginTop="20">
-                    <Text style={[styles.mainInfoText, styles.bold]}>{info?.phone}</Text>
+                    <TouchableOpacity onPress={() => openUrl(`tel:${info?.phone}`)}>
+                        <Text style={[styles.mainInfoText, styles.bold]}>{info?.phone}</Text>
+                    </TouchableOpacity>
                 </GradientBlock>
                 <GradientBlock marginTop="10" >
-                    <Text style={[styles.mainInfoText, styles.bold]}>{info?.email}</Text>
+                    <TouchableOpacity onPress={() => openUrl(`email:${info?.email}`)}>
+                        <Text style={[styles.mainInfoText, styles.bold]}>{info?.email}</Text>
+                    </TouchableOpacity>
                 </GradientBlock>
 
             </View >
